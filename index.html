@@ -6,1024 +6,860 @@
   <title>Residencial Bem Querer | Cuidado e Acolhimento para a Melhor Idade</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    /* ── Reset ───────────────────────────────────────────── */
+    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--sans); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--ink); background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; display: block; }
     a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
 
-    /* ── Tokens ──────────────────────────────────────────── */
+    /* ── Tokens ── */
     :root {
-      --rose:        #9B78D4;
-      --rose-dark:   #7A55B8;
-      --rose-deep:   #5230A0;
-      --rose-light:  #CDB8EE;
-      --rose-pale:   #F3EEFB;
-      --gold:        #A8823C;
-      --gold-light:  #D4B06A;
-      --gold-pale:   #F5ECD8;
-      --cream:       #F8F5FC;
-      --warm:        #F1ECFA;
-      --text:        #18181B;
-      --text-mid:    #44444A;
-      --text-muted:  #7C7C84;
+      /* Brand — used sparingly */
+      --purple:      #7A5CB8;
+      --purple-dk:   #5E429A;
+      --purple-pale: #F0EBF9;
+
+      /* Gold accent */
+      --gold:        #A07A3A;
+      --gold-lt:     #C9A05A;
+
+      /* Neutrals — dominant */
+      --ink:         #111115;
+      --ink-mid:     #3C3C44;
+      --ink-muted:   #72727C;
+      --ink-faint:   #A4A4AC;
+      --bg:          #FAFAF8;
+      --cream:       #F4F1EC;
+      --border:      #E4E0D8;
+      --border-lt:   #EDEBE5;
       --white:       #FFFFFF;
-      --border:      #DDD5EF;
-      --border-soft: #EAE4F6;
+
+      /* Dark section */
+      --dark-bg:     #13131A;
+      --dark-mid:    #1E1E28;
 
       --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans:  'Outfit', system-ui, sans-serif;
+      --sans:  'Jost', system-ui, sans-serif;
 
-      --radius-sm:  8px;
-      --radius:    16px;
-      --radius-lg: 28px;
+      --r-sm: 6px;
+      --r:    12px;
+      --r-lg: 20px;
 
-      --sh-xs: 0 1px 4px rgba(0,0,0,.06);
-      --sh-sm: 0 4px 16px rgba(0,0,0,.07);
-      --sh-md: 0 8px 32px rgba(0,0,0,.09);
-      --sh-lg: 0 20px 60px rgba(0,0,0,.10);
-
-      --ease: cubic-bezier(.4,0,.2,1);
-      --t: .28s var(--ease);
+      --ease: cubic-bezier(.4, 0, .2, 1);
+      --t:    .25s var(--ease);
     }
 
-    /* ── Layout helpers ──────────────────────────────────── */
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
-    .section { padding: 100px 0; }
-    .section-sm { padding: 72px 0; }
+    /* ── Layout ── */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    @media (min-width: 768px) { .wrap { padding: 0 40px; } }
 
-    /* ── Typography system ───────────────────────────────── */
+    /* ── Typography ── */
     .eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
-      font-size: .72rem; font-weight: 600; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--rose); margin-bottom: 18px;
+      font-size: .68rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--purple);
     }
-    .eyebrow::before {
-      content: ''; width: 24px; height: 1.5px; background: var(--gold); border-radius: 2px;
+    .eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold); }
+
+    h2 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; color: var(--ink);
     }
+    h2 em { font-style: italic; font-weight: 400; }
+    h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; line-height: 1.2; }
 
-    h1, h2, h3 { font-family: var(--serif); line-height: 1.15; }
-    h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 600; }
-    h2 em { font-style: italic; font-weight: 400; color: var(--rose); }
-    h3 { font-size: 1.5rem; font-weight: 600; }
+    .lead { font-size: 1rem; line-height: 1.8; color: var(--ink-mid); font-weight: 300; }
 
-    .lead { font-size: 1.05rem; color: var(--text-mid); line-height: 1.8; }
-
-    /* ── Buttons ─────────────────────────────────────────── */
+    /* ── Buttons ── */
     .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 28px; border-radius: 50px; font-family: var(--sans);
-      font-size: .9rem; font-weight: 600; cursor: pointer; border: none;
-      transition: all var(--t); white-space: nowrap; letter-spacing: .01em;
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 13px 26px; border-radius: 50px; font-family: var(--sans);
+      font-size: .85rem; font-weight: 600; letter-spacing: .02em;
+      border: none; cursor: pointer; transition: all var(--t); white-space: nowrap;
     }
-    .btn-primary {
-      background: var(--rose); color: var(--white);
-      box-shadow: 0 4px 18px rgba(192,82,106,.28);
+    .btn-purple {
+      background: var(--purple); color: var(--white);
+      box-shadow: 0 4px 18px rgba(122,92,184,.22);
     }
-    .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(192,82,106,.36); }
+    .btn-purple:hover { background: var(--purple-dk); transform: translateY(-2px); }
 
     .btn-wpp {
-      background: #22C55E; color: var(--white);
-      box-shadow: 0 4px 18px rgba(34,197,94,.28);
+      background: #25C26E; color: var(--white);
+      box-shadow: 0 4px 18px rgba(37,194,110,.22);
     }
-    .btn-wpp:hover { background: #16A34A; transform: translateY(-2px); }
+    .btn-wpp:hover { background: #1EA85D; transform: translateY(-2px); }
 
     .btn-outline {
-      background: transparent; color: var(--rose);
-      border: 1.5px solid var(--rose-light);
+      background: transparent; color: var(--ink-mid);
+      border: 1.5px solid var(--border);
     }
-    .btn-outline:hover { background: var(--rose-pale); border-color: var(--rose); }
+    .btn-outline:hover { border-color: var(--ink-mid); }
 
-    .btn-ghost {
-      background: transparent; color: var(--white);
-      border: 1.5px solid rgba(255,255,255,.45);
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.8); }
-
-    /* ── Animations ──────────────────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal.d1 { transition-delay: .08s; }
-    .reveal.d2 { transition-delay: .16s; }
-    .reveal.d3 { transition-delay: .24s; }
-    .reveal.d4 { transition-delay: .32s; }
-    .reveal.d5 { transition-delay: .40s; }
-    .reveal.d6 { transition-delay: .48s; }
-
-    /* ─────────────────────────────────────────────────────
-       HEADER
-    ───────────────────────────────────────────────────── */
-    #header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-      border-bottom: 1px solid transparent;
-      transition: background var(--t), border-color var(--t), padding var(--t), box-shadow var(--t);
-      padding: 22px 0;
-    }
-    #header.scrolled {
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(12px);
-      border-color: var(--border-soft);
-      box-shadow: var(--sh-xs);
-      padding: 14px 0;
-    }
-
-    .header-inner {
-      display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    }
-
-    .logo img {
-      height: 56px; width: auto; object-fit: contain;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.12));
-      transition: height var(--t);
-    }
-    #header.scrolled .logo img { height: 46px; }
-
-    nav { display: flex; align-items: center; gap: 4px; }
-    nav a {
-      font-size: .875rem; font-weight: 500; color: var(--white);
-      padding: 8px 15px; border-radius: var(--radius-sm);
-      transition: all var(--t);
-    }
-    #header.scrolled nav a { color: var(--text-mid); }
-    nav a:hover { background: var(--rose-pale); color: var(--rose) !important; }
-
-    .nav-wpp {
-      display: flex; align-items: center; gap: 9px;
-      background: #22C55E; color: var(--white);
-      padding: 9px 20px; border-radius: 50px;
-      font-size: .85rem; font-weight: 600;
-      box-shadow: 0 3px 14px rgba(34,197,94,.3);
-      transition: all var(--t);
-    }
-    .nav-wpp:hover { background: #16A34A; transform: translateY(-1px); }
-
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--t); }
-    #header.scrolled .hamburger span { background: var(--text); }
-
-    /* ─────────────────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(150deg, var(--rose-deep) 0%, var(--rose-dark) 55%, var(--rose) 100%);
-      padding: 120px 0 80px;
-    }
-
-    /* Decorative circles */
-    #hero::before {
-      content: '';
-      position: absolute; right: -160px; bottom: -160px;
-      width: 600px; height: 600px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.08);
-      pointer-events: none;
-    }
-    #hero::after {
-      content: '';
-      position: absolute; left: -80px; top: -80px;
-      width: 360px; height: 360px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.06);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-left {
-      display: flex; flex-direction: column;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: .72rem; font-weight: 600; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--gold-light); margin-bottom: 28px;
-    }
-    .hero-eyebrow span {
-      width: 28px; height: 1px; background: var(--gold-light); display: block;
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(2.8rem, 4.5vw, 4rem);
-      font-weight: 500; color: var(--white); line-height: 1.1;
-      margin-bottom: 24px;
-    }
-    .hero-title em { font-style: italic; font-weight: 300; color: var(--gold-light); }
-
-    .hero-sub {
-      font-size: 1rem; color: rgba(255,255,255,.72);
-      line-height: 1.75; margin-bottom: 40px;
-      font-weight: 300; max-width: 420px;
-    }
-
-    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-
-    .hero-stats {
-      display: flex; gap: 32px; margin-top: 56px;
-      padding-top: 40px; border-top: 1px solid rgba(255,255,255,.15);
-    }
-    .stat { }
-    .stat-n {
-      font-family: var(--serif); font-size: 2.4rem; font-weight: 600;
-      color: var(--gold-light); display: block; line-height: 1;
-    }
-    .stat-l {
-      font-size: .72rem; font-weight: 500; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(255,255,255,.55); display: block;
-      margin-top: 6px;
-    }
-    .stat-sep { width: 1px; background: rgba(255,255,255,.15); align-self: stretch; }
-
-    /* Right side: image col — same background as hero */
-    .hero-img-col {
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-
-    .hero-img-wrap {
-      width: 100%; max-width: 440px; position: relative;
-    }
-
-    .hero-img-main {
-      width: 100%; aspect-ratio: 4/5;
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,.07);
-      border: 1.5px solid rgba(255,255,255,.2);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 12px; color: rgba(255,255,255,.5);
+    .btn-ghost-light {
+      background: rgba(255,255,255,.12); color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.35);
       backdrop-filter: blur(4px);
     }
-    .hero-img-main i { font-size: 2.4rem; opacity: .5; }
-    .hero-img-main span { font-size: .76rem; opacity: .6; font-weight: 400; letter-spacing: .1em; }
+    .btn-ghost-light:hover { background: rgba(255,255,255,.22); }
 
-    /* Gold accent bar */
-    .hero-gold-line {
-      position: absolute; top: 32px; right: -16px;
-      width: 3px; height: 120px;
-      background: linear-gradient(to bottom, transparent, var(--gold-light), transparent);
-      border-radius: 2px;
-    }
-
-    /* Floating badge */
-    .hero-float-badge {
-      position: absolute; left: -36px; bottom: 56px;
-      background: var(--white); border-radius: 14px;
-      padding: 18px 22px;
-      box-shadow: var(--sh-lg);
-      display: flex; align-items: center; gap: 14px; min-width: 200px;
-      border: 1px solid var(--border-soft);
-    }
-    .hfb-icon {
-      width: 46px; height: 46px; flex-shrink: 0;
-      background: var(--rose-pale); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--rose); font-size: 1.1rem;
-    }
-    .hfb-text strong { display: block; font-family: var(--serif); font-size: 1.4rem; line-height: 1; }
-    .hfb-text span { font-size: .75rem; color: var(--text-muted); font-weight: 400; }
-
-    /* Scroll hint */
-    .scroll-hint {
-      position: absolute; bottom: 28px; left: 50%;
-      transform: translateX(-50%);
-      font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
-      color: rgba(255,255,255,.4);
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      animation: bob 2.2s ease-in-out infinite;
-    }
-    .scroll-hint i { font-size: .9rem; }
-    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
-
-    /* ─────────────────────────────────────────────────────
-       TRUST STRIP
-    ───────────────────────────────────────────────────── */
-    #trust {
-      background: var(--white);
-      border-top: 1px solid var(--border-soft);
-      border-bottom: 1px solid var(--border-soft);
-      padding: 36px 0;
-    }
-
-    .trust-inner {
-      display: flex; align-items: center; justify-content: center;
-      gap: 0; flex-wrap: wrap;
-    }
-
-    .trust-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 48px;
-      border-right: 1px solid var(--border-soft);
-    }
-    .trust-item:last-child { border-right: none; }
-
-    .trust-icon {
-      width: 42px; height: 42px; flex-shrink: 0;
-      background: var(--rose-pale); border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--rose); font-size: 1rem;
-    }
-    .trust-text strong { display: block; font-family: var(--serif); font-size: 1.6rem; line-height: 1; }
-    .trust-text span { font-size: .75rem; color: var(--text-muted); font-weight: 400; }
-
-    /* ─────────────────────────────────────────────────────
-       SOBRE NÓS
-    ───────────────────────────────────────────────────── */
-    #sobre {
-      background: var(--white);
-      padding: 100px 0;
-    }
-
-    .sobre-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-
-    .sobre-img-col { position: relative; }
-
-    .sobre-img-main {
-      width: 100%; aspect-ratio: 4/5;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, var(--warm) 0%, var(--rose-pale) 100%);
-      border: 2px dashed var(--rose-light);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 12px; color: var(--rose);
-    }
-    .sobre-img-main i { font-size: 2.4rem; opacity: .3; }
-    .sobre-img-main span { font-size: .76rem; opacity: .45; letter-spacing: .08em; font-weight: 500; }
-
-    /* Gold corner accent */
-    .img-accent {
-      position: absolute; bottom: -18px; right: -18px;
-      width: 160px; height: 160px; border-radius: 20px;
-      border: 2px solid var(--gold-light); z-index: -1;
-    }
-
-    /* Floating quote card */
-    .sobre-float {
-      position: absolute; top: 32px; left: -32px;
-      background: var(--rose); border-radius: 14px;
-      padding: 20px 24px;
-      box-shadow: 0 12px 40px rgba(192,82,106,.3);
-      max-width: 200px;
-    }
-    .sobre-float p {
-      font-family: var(--serif); font-size: 1rem; font-style: italic;
-      color: rgba(255,255,255,.92); line-height: 1.5; margin: 0;
-    }
-    .sobre-float::after {
-      content: '"';
-      font-family: var(--serif); font-size: 4rem; color: rgba(255,255,255,.15);
-      position: absolute; top: -8px; right: 10px; line-height: 1;
-    }
-
-    /* Text column */
-    .sobre-text .lead { margin-bottom: 18px; }
-
-    .sobre-pills {
-      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px;
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--rose-pale); border: 1px solid var(--rose-light);
-      color: var(--rose-dark); font-size: .8rem; font-weight: 600;
-      padding: 9px 16px; border-radius: 50px; letter-spacing: .04em;
-    }
-    .pill i { color: var(--gold); }
-
-    /* ─────────────────────────────────────────────────────
-       MODALIDADES
-    ───────────────────────────────────────────────────── */
-    #servicos { background: var(--cream); padding: 100px 0; }
-
-    .servicos-header { margin-bottom: 56px; }
-
-    .servicos-list { display: flex; flex-direction: column; gap: 0; }
-
-    .service-row {
-      display: grid; grid-template-columns: 80px 1fr auto;
-      align-items: start; gap: 32px; padding: 40px 0;
-      border-bottom: 1px solid var(--border-soft);
-      transition: var(--t);
-      position: relative;
-    }
-    .service-row:first-child { border-top: 1px solid var(--border-soft); }
-    .service-row::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0; width: 0;
-      background: var(--rose-pale); border-radius: var(--radius-sm);
-      transition: width .3s var(--ease);
-      z-index: -1;
-    }
-    .service-row:hover { padding-left: 20px; }
-    .service-row:hover::before { width: 100%; }
-
-    .svc-num {
-      font-family: var(--serif); font-size: 3.5rem; font-weight: 300;
-      color: var(--rose-light); line-height: 1; letter-spacing: -.02em;
-      padding-top: 4px;
-    }
-
-    .svc-body h3 {
-      font-size: 1.4rem; margin-bottom: 10px; color: var(--text);
-    }
-    .svc-body p { font-size: .95rem; color: var(--text-muted); line-height: 1.7; max-width: 540px; }
-
-    .svc-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--white); border: 1px solid var(--border);
-      color: var(--text-mid); font-size: .75rem; font-weight: 600;
-      padding: 8px 16px; border-radius: 50px; letter-spacing: .05em;
-      white-space: nowrap; margin-top: 6px; align-self: flex-start;
-    }
-    .svc-tag i { color: var(--rose); font-size: .85rem; }
-
-    /* ─────────────────────────────────────────────────────
-       EQUIPE
-    ───────────────────────────────────────────────────── */
-    #equipe { background: var(--white); padding: 100px 0; }
-
-    .equipe-header { margin-bottom: 56px; }
-
-    .equipe-cats {
-      display: flex; flex-direction: column; gap: 32px;
-    }
-
-    .cat-label {
-      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--text-muted);
-      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
-    }
-    .cat-label::after {
-      content: ''; flex: 1; height: 1px; background: var(--border-soft);
-    }
-
-    .cat-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
-    }
-    .cat-grid.col-2 { grid-template-columns: repeat(2, 1fr); }
-
-    .team-row {
-      display: flex; align-items: center; gap: 16px;
-      padding: 20px 22px; border-radius: var(--radius);
-      border: 1px solid var(--border-soft); background: var(--white);
-      transition: var(--t);
-    }
-    .team-row:hover {
-      border-color: var(--rose-light); box-shadow: var(--sh-sm);
-      background: var(--rose-pale);
-    }
-
-    .team-icon {
-      width: 48px; height: 48px; flex-shrink: 0; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: var(--rose);
-    }
-    .team-icon.med   { background: #FFF0F2; color: #C0526A; }
-    .team-icon.ther  { background: #F0F4FF; color: #5B7FCC; }
-    .team-icon.well  { background: #F0FAF0; color: #3D8A4B; }
-
-    .team-info h4 {
-      font-family: var(--serif); font-size: 1rem; font-weight: 600;
-      color: var(--text); line-height: 1.2; margin-bottom: 2px;
-    }
-    .team-info span {
-      font-size: .78rem; color: var(--text-muted); font-weight: 400;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       DIFERENCIAIS
-    ───────────────────────────────────────────────────── */
-    #diferenciais { background: var(--cream); padding: 100px 0; }
-
-    .dif-header { text-align: center; margin-bottom: 60px; }
-    .dif-header h2, .dif-header .eyebrow { text-align: center; }
-    .dif-header .eyebrow { margin: 0 auto 18px; }
-
-    .dif-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    }
-
-    .dif-card {
-      background: var(--white); border-radius: var(--radius);
-      border: 1px solid var(--border-soft); padding: 36px 30px;
-      transition: var(--t); position: relative; overflow: hidden;
-    }
-    .dif-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--rose), var(--gold));
-      transform: scaleX(0); transform-origin: left; transition: transform var(--t);
-    }
-    .dif-card:hover { box-shadow: var(--sh-md); transform: translateY(-4px); border-color: transparent; }
-    .dif-card:hover::after { transform: scaleX(1); }
-
-    .dif-icon {
-      width: 52px; height: 52px; border-radius: 13px;
-      background: var(--rose-pale); color: var(--rose);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem; margin-bottom: 20px;
-      border: 1px solid var(--rose-light);
-    }
-
-    .dif-card h4 { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
-    .dif-card p { font-size: .88rem; color: var(--text-muted); line-height: 1.7; }
-
-    /* ─────────────────────────────────────────────────────
-       GALERIA
-    ───────────────────────────────────────────────────── */
-    #estrutura { background: var(--white); padding: 100px 0; }
-
-    .estrutura-header { margin-bottom: 48px; }
-
-    .galeria-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: repeat(2, 220px);
-      gap: 14px;
-    }
-
-    .g-item { border-radius: 14px; overflow: hidden; }
-    .g-item:nth-child(1) { grid-column: 1 / 6;  grid-row: 1 / 3; }
-    .g-item:nth-child(2) { grid-column: 6 / 9;  grid-row: 1 / 2; }
-    .g-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1 / 2; }
-    .g-item:nth-child(4) { grid-column: 6 / 10; grid-row: 2 / 3; }
-    .g-item:nth-child(5) { grid-column: 10 / 13;grid-row: 2 / 3; }
-
-    .g-ph {
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, var(--warm) 0%, var(--rose-pale) 100%);
-      border: 1.5px dashed var(--rose-light);
+    /* ── Placeholder image ── */
+    .ph {
+      background: var(--cream); border: 1.5px dashed var(--border);
+      border-radius: var(--r-lg);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 10px; color: var(--rose); transition: var(--t);
+      gap: 10px; color: var(--ink-faint);
     }
-    .g-ph:hover { background: linear-gradient(135deg, var(--rose-pale) 0%, var(--gold-pale) 100%); }
-    .g-ph i { font-size: 1.8rem; opacity: .35; }
-    .g-ph span { font-size: .7rem; opacity: .5; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    .ph i { font-size: 1.8rem; opacity: .5; }
+    .ph span { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
 
-    /* ─────────────────────────────────────────────────────
-       CTA BAND
-    ───────────────────────────────────────────────────── */
-    #cta-band {
-      background: linear-gradient(120deg, var(--rose-deep) 0%, var(--rose-dark) 60%, var(--rose) 100%);
-      padding: 80px 0; text-align: center; position: relative; overflow: hidden;
+    /* ── Animations ── */
+    .up { opacity: 0; transform: translateY(22px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .up.in { opacity: 1; transform: none; }
+    .up.d1 { transition-delay: .07s; } .up.d2 { transition-delay: .14s; }
+    .up.d3 { transition-delay: .21s; } .up.d4 { transition-delay: .28s; }
+    .up.d5 { transition-delay: .35s; } .up.d6 { transition-delay: .42s; }
+
+    /* ════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════ */
+    #hdr {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 16px 0;
+      transition: background var(--t), box-shadow var(--t), padding var(--t), border-color var(--t);
+      border-bottom: 1px solid transparent;
     }
-    #cta-band::before {
+    #hdr.on {
+      background: rgba(250,250,248,.95); backdrop-filter: blur(14px);
+      border-color: var(--border-lt); box-shadow: 0 1px 20px rgba(0,0,0,.05);
+      padding: 12px 0;
+    }
+
+    .hdr-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+
+    .hdr-logo img {
+      height: 50px; width: auto; object-fit: contain;
+      transition: height var(--t), filter var(--t);
+    }
+    #hdr.on .hdr-logo img { height: 42px; }
+
+    .hdr-nav { display: none; }
+    @media (min-width: 900px) {
+      .hdr-nav { display: flex; align-items: center; gap: 2px; }
+    }
+    .hdr-nav a {
+      font-size: .82rem; font-weight: 500; color: var(--white);
+      padding: 7px 13px; border-radius: var(--r-sm); transition: all var(--t);
+    }
+    #hdr.on .hdr-nav a { color: var(--ink-mid); }
+    .hdr-nav a:hover { background: var(--purple-pale); color: var(--purple) !important; }
+
+    .hdr-wpp {
+      display: none;
+      align-items: center; gap: 8px;
+      background: #25C26E; color: var(--white) !important;
+      padding: 8px 18px; border-radius: 50px;
+      font-size: .8rem; font-weight: 600;
+      box-shadow: 0 2px 12px rgba(37,194,110,.25);
+      transition: all var(--t);
+    }
+    @media (min-width: 900px) { .hdr-wpp { display: flex; } }
+    .hdr-wpp:hover { background: #1EA85D !important; transform: translateY(-1px); }
+
+    .hdr-burger {
+      display: flex; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    @media (min-width: 900px) { .hdr-burger { display: none; } }
+    .hdr-burger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px; transition: var(--t);
+    }
+    #hdr.on .hdr-burger span { background: var(--ink); }
+
+    /* Mobile menu overlay */
+    .mob-menu {
+      display: none; position: fixed; inset: 0; z-index: 850;
+      background: var(--white); flex-direction: column;
+      align-items: center; justify-content: center; gap: 28px;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu a { font-family: var(--serif); font-size: 2rem; font-weight: 500; color: var(--ink); }
+    .mob-menu a:hover { color: var(--purple); }
+    .mob-close {
+      position: absolute; top: 18px; right: 18px;
+      background: none; border: none; font-size: 1.5rem;
+      cursor: pointer; color: var(--ink-muted); padding: 8px;
+    }
+    .mob-wpp {
+      display: flex; align-items: center; gap: 10px;
+      background: #25C26E; color: var(--white) !important;
+      padding: 14px 28px; border-radius: 50px;
+      font-size: 1rem; font-weight: 600; margin-top: 8px;
+    }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      background: var(--dark-bg);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 100px 0 0;
+      position: relative; overflow: hidden;
+    }
+
+    /* Subtle radial glow */
+    .hero-glow {
+      position: absolute; top: -20%; right: -10%;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,92,184,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: 20%; left: -10%;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,92,184,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-body {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr;
+      gap: 40px; align-items: end;
+      padding-bottom: 60px;
+    }
+    @media (min-width: 900px) {
+      .hero-body { grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding-bottom: 80px; }
+    }
+
+    .hero-text .eyebrow { color: var(--gold-lt); margin-bottom: 20px; display: flex; }
+    .hero-text .eyebrow::before { background: var(--gold-lt); }
+
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 400; line-height: 1.1; color: var(--white);
+      margin-bottom: 20px;
+    }
+    .hero-h1 em { font-style: italic; color: rgba(255,255,255,.55); }
+
+    .hero-sub {
+      font-size: .95rem; font-weight: 300; line-height: 1.8;
+      color: rgba(255,255,255,.55); margin-bottom: 36px; max-width: 440px;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex; gap: 0;
+      border-top: 1px solid rgba(255,255,255,.1);
+      margin-top: 48px; padding-top: 0;
+    }
+    .h-stat {
+      flex: 1; padding: 24px 0;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .h-stat:last-child { border-right: none; }
+    .h-stat-n {
+      font-family: var(--serif); font-size: 2rem; font-weight: 400;
+      color: var(--white); display: block; line-height: 1;
+    }
+    .h-stat-l {
+      font-size: .68rem; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(255,255,255,.38);
+      display: block; margin-top: 6px;
+    }
+
+    /* Hero image col */
+    .hero-img-col { display: none; }
+    @media (min-width: 900px) { .hero-img-col { display: flex; justify-content: flex-end; } }
+
+    .hero-img-frame {
+      width: 100%; max-width: 420px;
+      aspect-ratio: 3/4; border-radius: 20px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; color: rgba(255,255,255,.25);
+      position: relative;
+    }
+    .hero-img-frame i { font-size: 2rem; }
+    .hero-img-frame span { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; }
+
+    /* Gold accent bar */
+    .hero-img-frame::before {
       content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 360px; height: 360px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.08); pointer-events: none;
-    }
-    #cta-band::after {
-      content: '';
-      position: absolute; bottom: -100px; left: -60px;
-      width: 280px; height: 280px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.06); pointer-events: none;
+      position: absolute; right: -16px; top: 40px;
+      width: 2px; height: 100px;
+      background: linear-gradient(to bottom, transparent, var(--gold-lt), transparent);
     }
 
-    .cta-band-inner { position: relative; z-index: 1; }
-    .cta-band-inner .eyebrow { color: var(--gold-light); margin-bottom: 20px; }
-    .cta-band-inner .eyebrow::before { background: var(--gold-light); }
-    .cta-band-inner h2 { color: var(--white); font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 16px; }
-    .cta-band-inner p { color: rgba(255,255,255,.7); font-size: 1rem; margin-bottom: 36px; font-weight: 300; }
+    /* Floating card */
+    .hero-card {
+      position: absolute; bottom: -20px; left: -36px;
+      background: var(--white); border-radius: var(--r);
+      padding: 16px 20px; display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.3); min-width: 185px;
+    }
+    .hc-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--purple-pale); color: var(--purple);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .hc-n { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; line-height: 1; display: block; }
+    .hc-l { font-size: .72rem; color: var(--ink-muted); display: block; margin-top: 2px; }
 
-    .cta-band-actions { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    /* ════════════════════════════════════════
+       TRUST STRIP
+    ════════════════════════════════════════ */
+    #trust {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-lt);
+    }
 
-    /* ─────────────────────────────────────────────────────
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-left: 1px solid var(--border-lt);
+    }
+    @media (min-width: 640px) { .trust-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .trust-item {
+      padding: 24px 20px;
+      border-right: 1px solid var(--border-lt);
+      border-bottom: 1px solid var(--border-lt);
+      display: flex; align-items: center; gap: 14px;
+    }
+    @media (min-width: 640px) { .trust-item { border-bottom: none; } }
+
+    .ti-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; color: var(--purple);
+    }
+    .ti-text strong { display: block; font-size: .85rem; font-weight: 600; color: var(--ink); }
+    .ti-text span { font-size: .75rem; color: var(--ink-muted); }
+
+    /* ════════════════════════════════════════
+       SOBRE
+    ════════════════════════════════════════ */
+    #sobre { padding: 80px 0; }
+    @media (min-width: 768px) { #sobre { padding: 110px 0; } }
+
+    .sobre-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 48px; align-items: center;
+    }
+    @media (min-width: 768px) { .sobre-grid { grid-template-columns: 1fr 1fr; gap: 80px; } }
+
+    .sobre-img { position: relative; }
+    .sobre-ph { width: 100%; aspect-ratio: 4/5; }
+    .sobre-img-accent {
+      display: none;
+      position: absolute; bottom: -16px; right: -16px;
+      width: 120px; height: 120px; border-radius: 14px;
+      border: 1.5px solid var(--gold-lt); z-index: -1;
+    }
+    @media (min-width: 768px) { .sobre-img-accent { display: block; } }
+
+    .sobre-quote {
+      display: none;
+      position: absolute; top: 28px; left: -24px;
+      background: var(--purple); border-radius: var(--r);
+      padding: 16px 20px; max-width: 180px;
+      box-shadow: 0 12px 36px rgba(122,92,184,.3);
+    }
+    @media (min-width: 768px) { .sobre-quote { display: block; } }
+    .sobre-quote p { font-family: var(--serif); font-size: .92rem; font-style: italic; color: rgba(255,255,255,.9); line-height: 1.55; }
+
+    .sobre-text .eyebrow { margin-bottom: 16px; }
+    .sobre-text h2 { margin-bottom: 20px; }
+    .sobre-text .lead { margin-bottom: 16px; }
+
+    .sobre-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--cream); border: 1px solid var(--border);
+      color: var(--ink-mid); font-size: .75rem; font-weight: 500;
+      padding: 7px 13px; border-radius: 50px;
+    }
+    .pill i { color: var(--gold); font-size: .8rem; }
+
+    /* ════════════════════════════════════════
+       MODALIDADES
+    ════════════════════════════════════════ */
+    #servicos { background: var(--cream); padding: 80px 0; }
+    @media (min-width: 768px) { #servicos { padding: 110px 0; } }
+
+    .sec-hdr { margin-bottom: 48px; }
+    .sec-hdr .eyebrow { margin-bottom: 14px; }
+
+    .svc-list { border-top: 1px solid var(--border); }
+
+    .svc-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px; padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: var(--t);
+    }
+    @media (min-width: 640px) {
+      .svc-row { grid-template-columns: 64px 1fr auto; gap: 28px; align-items: center; }
+    }
+
+    .svc-num {
+      font-family: var(--serif); font-size: 2.4rem; font-weight: 400;
+      color: var(--border); line-height: 1; padding-top: 4px;
+    }
+
+    .svc-info h3 { margin-bottom: 8px; color: var(--ink); }
+    .svc-info p { font-size: .88rem; line-height: 1.7; color: var(--ink-muted); max-width: 520px; }
+
+    .svc-tag {
+      display: none;
+      align-items: center; gap: 6px;
+      background: var(--white); border: 1px solid var(--border);
+      color: var(--ink-muted); font-size: .72rem; font-weight: 600;
+      padding: 7px 14px; border-radius: 50px; letter-spacing: .05em;
+      white-space: nowrap;
+    }
+    @media (min-width: 640px) { .svc-tag { display: flex; } }
+    .svc-tag i { color: var(--purple); }
+
+    /* ════════════════════════════════════════
+       EQUIPE
+    ════════════════════════════════════════ */
+    #equipe { padding: 80px 0; }
+    @media (min-width: 768px) { #equipe { padding: 110px 0; } }
+
+    .equipe-intro { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px; }
+    @media (min-width: 768px) { .equipe-intro { grid-template-columns: 1fr 1fr; align-items: end; } }
+    .equipe-intro h2 { margin-top: 14px; }
+
+    .cat-block { margin-bottom: 36px; }
+    .cat-label {
+      font-size: .68rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-faint);
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    }
+    .cat-label::after { content: ''; flex: 1; height: 1px; background: var(--border-lt); }
+
+    .team-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 640px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+    .team-grid.col2 { }
+    @media (min-width: 900px) { .team-grid.col2 { grid-template-columns: 1fr 1fr; } }
+
+    .team-card {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px; border-radius: var(--r);
+      border: 1px solid var(--border-lt); transition: var(--t);
+    }
+    .team-card:hover { border-color: var(--border); background: var(--cream); }
+
+    .tc-icon {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .tc-icon.med  { background: #F0EBF9; color: var(--purple); }
+    .tc-icon.ther { background: #EBF4F9; color: #3A7FA8; }
+    .tc-icon.well { background: #EDF5EE; color: #3A8A4A; }
+
+    .tc-name { font-size: .88rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+    .tc-role { font-size: .75rem; color: var(--ink-muted); margin-top: 2px; }
+
+    /* ════════════════════════════════════════
+       DIFERENCIAIS — dark section
+    ════════════════════════════════════════ */
+    #dif {
+      background: var(--dark-bg);
+      padding: 80px 0;
+    }
+    @media (min-width: 768px) { #dif { padding: 110px 0; } }
+
+    .dif-top { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 56px; }
+    @media (min-width: 768px) { .dif-top { grid-template-columns: 1fr 1fr; align-items: end; } }
+    .dif-top .eyebrow { color: var(--gold-lt); }
+    .dif-top .eyebrow::before { background: var(--gold-lt); }
+    .dif-top h2 { color: var(--white); margin-top: 14px; }
+    .dif-top h2 em { color: rgba(255,255,255,.4); }
+    .dif-top .lead { color: rgba(255,255,255,.45); align-self: end; }
+
+    .dif-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 1px; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--r-lg); overflow: hidden;
+    }
+    @media (min-width: 640px) { .dif-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .dif-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .dif-item {
+      padding: 36px 28px;
+      background: var(--dark-bg);
+      transition: background var(--t);
+    }
+    .dif-item:hover { background: var(--dark-mid); }
+
+    .dif-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(122,92,184,.15); color: rgba(195,170,230,.8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 18px;
+    }
+    .dif-item h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+    .dif-item p { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.7; }
+
+    /* ════════════════════════════════════════
+       GALERIA
+    ════════════════════════════════════════ */
+    #galeria { padding: 80px 0; background: var(--white); }
+    @media (min-width: 768px) { #galeria { padding: 110px 0; } }
+
+    .gal-top { margin-bottom: 36px; }
+    .gal-top .eyebrow { margin-bottom: 14px; }
+
+    .gal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 180px 180px;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .gal-grid {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 240px 240px;
+        gap: 12px;
+      }
+      .gal-item:nth-child(1) { grid-column: 1 / 6;  grid-row: 1 / 3; }
+      .gal-item:nth-child(2) { grid-column: 6 / 9;  grid-row: 1 / 2; }
+      .gal-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1 / 2; }
+      .gal-item:nth-child(4) { grid-column: 6 / 10; grid-row: 2 / 3; }
+      .gal-item:nth-child(5) { grid-column: 10 / 13;grid-row: 2 / 3; }
+    }
+
+    .gal-item { border-radius: var(--r); overflow: hidden; }
+    .gal-ph {
+      width: 100%; height: 100%;
+      background: var(--cream); border: 1.5px dashed var(--border);
+      border-radius: var(--r);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px; color: var(--ink-faint); transition: var(--t);
+    }
+    .gal-ph:hover { background: var(--purple-pale); border-color: rgba(122,92,184,.2); }
+    .gal-ph i { font-size: 1.4rem; opacity: .5; }
+    .gal-ph span { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
+
+    /* Mobile: all equal */
+    @media (max-width: 639px) {
+      .gal-item:nth-child(1) { grid-column: 1 / -1; }
+    }
+
+    /* ════════════════════════════════════════
+       CTA BAND — the one purple section
+    ════════════════════════════════════════ */
+    #cta {
+      background: var(--purple);
+      padding: 72px 0; text-align: center;
+    }
+
+    .cta-inner .eyebrow { color: rgba(255,255,255,.6); margin-bottom: 16px; justify-content: center; }
+    .cta-inner .eyebrow::before { background: rgba(255,255,255,.4); }
+    .cta-inner h2 { color: var(--white); margin-bottom: 12px; font-size: clamp(1.7rem, 3.5vw, 2.4rem); }
+    .cta-inner p { color: rgba(255,255,255,.65); font-size: .95rem; margin-bottom: 32px; font-weight: 300; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* ════════════════════════════════════════
        DEPOIMENTOS
-    ───────────────────────────────────────────────────── */
-    #depoimentos { background: var(--cream); padding: 100px 0; }
+    ════════════════════════════════════════ */
+    #dep { padding: 80px 0; background: var(--cream); }
+    @media (min-width: 768px) { #dep { padding: 110px 0; } }
 
-    .dep-header { text-align: center; margin-bottom: 56px; }
-    .dep-header .eyebrow { margin: 0 auto 18px; }
+    .dep-hdr { margin-bottom: 40px; }
+    .dep-hdr .eyebrow { margin-bottom: 14px; }
 
-    .dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .dep-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .dep-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .dep-grid { grid-template-columns: repeat(3, 1fr); } }
 
     .dep-card {
-      background: var(--white); border-radius: var(--radius);
-      border: 1px solid var(--border-soft); padding: 36px 32px;
-      position: relative; transition: var(--t);
+      background: var(--white); border-radius: var(--r);
+      border: 1px solid var(--border-lt); padding: 28px;
+      transition: var(--t);
     }
-    .dep-card:hover { box-shadow: var(--sh-md); transform: translateY(-4px); }
+    .dep-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.06); transform: translateY(-3px); }
 
-    .dep-quote {
-      font-family: var(--serif); font-size: 4.5rem; font-weight: 700;
-      color: var(--rose-light); line-height: .7; margin-bottom: 16px;
-      display: block;
+    .dep-stars { color: var(--gold); font-size: .75rem; margin-bottom: 14px; letter-spacing: .1em; }
+    .dep-quote-mark {
+      font-family: var(--serif); font-size: 3.5rem; line-height: .6;
+      color: var(--border); display: block; margin-bottom: 14px;
     }
-
-    .dep-card p {
-      font-family: var(--serif); font-size: 1.05rem; font-style: italic;
-      color: var(--text-mid); line-height: 1.65; margin-bottom: 28px;
+    .dep-card p { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink-mid); line-height: 1.6; margin-bottom: 24px; }
+    .dep-author { display: flex; align-items: center; gap: 10px; }
+    .dep-av {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--purple-pale); color: var(--purple);
+      display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0;
     }
+    .dep-name strong { font-size: .83rem; font-weight: 600; display: block; }
+    .dep-name span { font-size: .72rem; color: var(--ink-muted); }
 
-    .dep-author { display: flex; align-items: center; gap: 12px; }
-    .dep-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--rose-pale); border: 2px solid var(--rose-light);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--rose); font-size: 1.1rem; flex-shrink: 0;
-    }
-    .dep-name strong { display: block; font-size: .9rem; font-weight: 600; }
-    .dep-name span { font-size: .78rem; color: var(--text-muted); }
-
-    .dep-stars { color: var(--gold); font-size: .8rem; margin-bottom: 14px; }
-
-    /* ─────────────────────────────────────────────────────
+    /* ════════════════════════════════════════
        CONTATO
-    ───────────────────────────────────────────────────── */
-    #contato { background: var(--white); padding: 100px 0; }
+    ════════════════════════════════════════ */
+    #contato { padding: 80px 0; background: var(--white); }
+    @media (min-width: 768px) { #contato { padding: 110px 0; } }
 
-    .contato-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+    .contato-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+    @media (min-width: 768px) { .contato-grid { grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; } }
 
-    .contato-text-col h2 { margin-bottom: 14px; }
-    .contato-text-col .lead { margin-bottom: 36px; }
+    .contato-text .eyebrow { margin-bottom: 14px; }
+    .contato-text h2 { margin-bottom: 14px; }
+    .contato-text .lead { margin-bottom: 32px; }
 
-    .contact-list { display: flex; flex-direction: column; gap: 14px; }
-
-    .contact-row {
-      display: flex; align-items: flex-start; gap: 16px;
-      padding: 20px 22px;
-      background: var(--cream); border: 1px solid var(--border-soft);
-      border-radius: var(--radius-sm); transition: var(--t);
+    .c-list { display: flex; flex-direction: column; gap: 10px; }
+    .c-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 18px; border-radius: var(--r);
+      border: 1px solid var(--border-lt); transition: var(--t);
     }
-    .contact-row:hover { border-color: var(--rose-light); background: var(--rose-pale); }
-
-    .c-icon {
-      width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px;
+    .c-row:hover { border-color: var(--border); }
+    .c-ico {
+      width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: var(--white);
+      font-size: .9rem; color: var(--white);
     }
-    .c-icon.rose  { background: var(--rose); }
-    .c-icon.green { background: #22C55E; }
+    .c-ico.p { background: var(--purple); }
+    .c-ico.g { background: #25C26E; }
+    .c-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--purple); display: block; margin-bottom: 2px; }
+    .c-val { font-size: .9rem; color: var(--ink); }
 
-    .c-info strong {
-      display: block; font-size: .72rem; text-transform: uppercase;
-      letter-spacing: .1em; color: var(--rose-dark); font-weight: 700; margin-bottom: 3px;
+    .map-box {
+      border-radius: var(--r-lg); overflow: hidden;
+      border: 1px solid var(--border-lt); height: 420px;
     }
-    .c-info span { font-size: .95rem; color: var(--text); }
+    @media (min-width: 768px) { .map-box { height: 480px; } }
+    .map-box iframe { width: 100%; height: 100%; border: none; display: block; }
 
-    .map-frame {
-      border-radius: var(--radius-lg); overflow: hidden;
-      box-shadow: var(--sh-lg); border: 2px solid var(--border-soft);
-      height: 500px;
-    }
-    .map-frame iframe { width: 100%; height: 100%; border: none; display: block; }
-
-    /* ─────────────────────────────────────────────────────
+    /* ════════════════════════════════════════
        FOOTER
-    ───────────────────────────────────────────────────── */
-    #footer {
-      background: var(--rose-deep);
-      padding: 72px 0 32px;
-    }
+    ════════════════════════════════════════ */
+    #footer { background: var(--dark-bg); padding: 60px 0 28px; }
 
-    .footer-top {
-      display: grid; grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 60px; padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      margin-bottom: 28px;
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 40px; padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 24px;
     }
+    @media (min-width: 640px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; } }
 
-    .footer-brand img {
-      height: 52px; width: auto; margin-bottom: 18px;
-      filter: brightness(10) saturate(0); opacity: .7;
-    }
-    .footer-brand p { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 300px; }
+    .ft-brand img { height: 48px; width: auto; margin-bottom: 14px; filter: brightness(10) saturate(0); opacity: .55; }
+    .ft-brand p { font-size: .82rem; color: rgba(255,255,255,.38); line-height: 1.7; max-width: 280px; }
 
-    .footer-socials { display: flex; gap: 10px; margin-top: 24px; }
-    .social-btn {
-      width: 38px; height: 38px; border-radius: 9px;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+    .ft-socials { display: flex; gap: 8px; margin-top: 20px; }
+    .ft-soc {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
       display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,.65); font-size: .95rem; transition: var(--t);
+      color: rgba(255,255,255,.5); font-size: .85rem; transition: var(--t);
     }
-    .social-btn:hover { background: var(--rose); border-color: var(--rose); color: var(--white); transform: translateY(-2px); }
+    .ft-soc:hover { background: var(--purple); border-color: var(--purple); color: var(--white); }
 
-    .footer-col h5 {
-      font-family: var(--serif); color: var(--white); font-size: 1rem;
-      font-weight: 600; margin-bottom: 20px;
-    }
+    .ft-col h5 { font-family: var(--serif); color: var(--white); font-size: .95rem; margin-bottom: 16px; font-weight: 400; }
+    .ft-links { display: flex; flex-direction: column; gap: 9px; }
+    .ft-links a { font-size: .8rem; color: rgba(255,255,255,.38); transition: color .2s; }
+    .ft-links a:hover { color: rgba(255,255,255,.75); }
 
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a { font-size: .875rem; color: rgba(255,255,255,.5); transition: color .2s; }
-    .footer-links a:hover { color: var(--rose-light); }
+    .ft-item { display: flex; gap: 9px; margin-bottom: 10px; font-size: .8rem; color: rgba(255,255,255,.38); }
+    .ft-item i { color: var(--gold-lt); margin-top: 2px; flex-shrink: 0; width: 12px; font-size: .75rem; }
 
-    .footer-contact-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      margin-bottom: 12px; font-size: .875rem; color: rgba(255,255,255,.5);
-    }
-    .footer-contact-item i { color: var(--gold-light); margin-top: 3px; width: 14px; flex-shrink: 0; }
+    .footer-bot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: .72rem; color: rgba(255,255,255,.22); }
 
-    .footer-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: .78rem; color: rgba(255,255,255,.3);
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FLOATING WHATSAPP
-    ───────────────────────────────────────────────────── */
+    /* ════════════════════════════════════════
+       FLOATING WPP
+    ════════════════════════════════════════ */
     .wpp-float {
-      position: fixed; bottom: 28px; right: 28px; z-index: 800;
-      display: flex; align-items: center; gap: 10px;
-      background: #22C55E; color: var(--white);
-      padding: 14px 22px; border-radius: 50px;
-      font-size: .88rem; font-weight: 600;
-      box-shadow: 0 6px 28px rgba(34,197,94,.4);
+      position: fixed; bottom: 20px; right: 20px; z-index: 800;
+      background: #25C26E; color: var(--white);
+      border-radius: 50px; padding: 13px 20px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: .82rem; font-weight: 600;
+      box-shadow: 0 6px 24px rgba(37,194,110,.35);
       transition: all var(--t);
-      animation: pulsewpp 3s ease-in-out infinite;
+      animation: wpp-pulse 3s ease-in-out infinite;
     }
-    .wpp-float i { font-size: 1.3rem; }
-    .wpp-float:hover { background: #16A34A; transform: scale(1.04) translateY(-2px); animation: none; }
+    .wpp-float i { font-size: 1.2rem; }
+    .wpp-float span { display: none; }
+    @media (min-width: 640px) { .wpp-float span { display: inline; } .wpp-float { padding: 13px 22px; } }
+    .wpp-float:hover { background: #1EA85D; transform: translateY(-2px); animation: none; box-shadow: 0 10px 32px rgba(37,194,110,.4); }
 
-    @keyframes pulsewpp {
-      0%,100% { box-shadow: 0 6px 28px rgba(34,197,94,.4); }
-      50%      { box-shadow: 0 6px 44px rgba(34,197,94,.6); }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       MOBILE MENU
-    ───────────────────────────────────────────────────── */
-    .mobile-nav {
-      display: none; position: fixed; inset: 0; z-index: 850;
-      background: var(--white);
-      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-family: var(--serif); font-size: 2rem; font-weight: 500;
-      color: var(--text); transition: color .2s;
-    }
-    .mobile-nav a:hover { color: var(--rose); }
-    .close-mobile {
-      position: absolute; top: 20px; right: 20px;
-      background: none; border: none; font-size: 1.6rem;
-      cursor: pointer; color: var(--text-muted);
-    }
-
-    /* ─────────────────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      #hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-img-col { display: none; }
-      .scroll-hint { color: rgba(255,255,255,.5); }
-
-      .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
-      .sobre-img-col { order: -1; }
-      .sobre-float { left: 10px; top: 10px; }
-
-      .dif-grid { grid-template-columns: repeat(2, 1fr); }
-      .dep-grid { grid-template-columns: 1fr 1fr; }
-      .dep-grid .dep-card:last-child { grid-column: 1 / -1; max-width: 400px; margin: 0 auto; }
-
-      .contato-grid { grid-template-columns: 1fr; }
-      .map-frame { height: 340px; }
-
-      .footer-top { grid-template-columns: 1fr 1fr; }
-
-      .galeria-grid { grid-template-rows: repeat(3, 200px); }
-      .g-item:nth-child(1) { grid-column: 1/7; grid-row: 1/2; }
-      .g-item:nth-child(2) { grid-column: 7/13; grid-row: 1/2; }
-      .g-item:nth-child(3) { grid-column: 1/5; grid-row: 2/3; }
-      .g-item:nth-child(4) { grid-column: 5/13; grid-row: 2/3; }
-      .g-item:nth-child(5) { grid-column: 1/13; grid-row: 3/4; }
-    }
-
-    @media (max-width: 768px) {
-      nav, .nav-wpp { display: none; }
-      .hamburger { display: flex; }
-
-      .service-row { grid-template-columns: 56px 1fr; gap: 20px; }
-      .svc-tag { grid-column: 1 / -1; }
-
-      .cat-grid, .cat-grid.col-2 { grid-template-columns: 1fr; }
-      .dif-grid { grid-template-columns: 1fr; }
-      .dep-grid { grid-template-columns: 1fr; }
-      .dep-grid .dep-card:last-child { grid-column: auto; max-width: none; }
-
-      .trust-item { padding: 12px 20px; border-right: none; border-bottom: 1px solid var(--border-soft); }
-      .trust-inner { flex-direction: column; align-items: flex-start; }
-
-      .galeria-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 12px; }
-      .g-item { aspect-ratio: 1; }
-      .g-item:nth-child(n) { grid-column: auto; grid-row: auto; }
-      .g-item:nth-child(1) { grid-column: 1 / -1; aspect-ratio: 16/9; }
-
-      .footer-top { grid-template-columns: 1fr; gap: 36px; }
-      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-
-      .wpp-float .wpp-label { display: none; }
-      .wpp-float { padding: 16px; border-radius: 50%; }
-
-      #hero { padding: 110px 0 70px; }
-      .hero-stats { flex-direction: column; gap: 16px; }
-      .stat-sep { width: 48px; height: 1px; }
+    @keyframes wpp-pulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,194,110,.35); }
+      50%       { box-shadow: 0 6px 36px rgba(37,194,110,.55); }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     HEADER
-══════════════════════════════════════════════════════════ -->
-<header id="header">
-  <div class="container header-inner">
-
-    <a href="#" class="logo">
+<!-- ── HEADER ───────────────────────────────────────── -->
+<header id="hdr">
+  <div class="wrap hdr-inner">
+    <a href="#" class="hdr-logo">
       <img src="https://residencialbemquerer.com.br/wp-content/uploads/2021/02/asasasasas.png" alt="Residencial Bem Querer" />
     </a>
 
-    <nav>
+    <nav class="hdr-nav">
       <a href="#sobre">Sobre</a>
       <a href="#servicos">Serviços</a>
       <a href="#equipe">Equipe</a>
-      <a href="#estrutura">Estrutura</a>
+      <a href="#galeria">Estrutura</a>
       <a href="#contato">Contato</a>
     </nav>
 
-    <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Residencial%20Bem%20Querer." class="nav-wpp" target="_blank">
-      <i class="fab fa-whatsapp"></i> Falar pelo WhatsApp
+    <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Residencial%20Bem%20Querer." class="hdr-wpp" target="_blank">
+      <i class="fab fa-whatsapp"></i> WhatsApp
     </a>
 
-    <div class="hamburger" id="hamburger">
+    <button class="hdr-burger" id="burger" aria-label="Menu">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </header>
 
-<!-- Mobile nav -->
-<div class="mobile-nav" id="mobileNav">
-  <button class="close-mobile" id="closeNav"><i class="fas fa-times"></i></button>
-  <a href="#sobre"     onclick="closeMenu()">Sobre</a>
-  <a href="#servicos"  onclick="closeMenu()">Serviços</a>
-  <a href="#equipe"    onclick="closeMenu()">Equipe</a>
-  <a href="#estrutura" onclick="closeMenu()">Estrutura</a>
-  <a href="#contato"   onclick="closeMenu()">Contato</a>
-  <a href="https://wa.me/5562983410308" target="_blank" style="color:#22C55E;">
-    <i class="fab fa-whatsapp"></i> WhatsApp
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
+  <a href="#sobre"    onclick="closeMob()">Sobre</a>
+  <a href="#servicos" onclick="closeMob()">Serviços</a>
+  <a href="#equipe"   onclick="closeMob()">Equipe</a>
+  <a href="#galeria"  onclick="closeMob()">Estrutura</a>
+  <a href="#contato"  onclick="closeMob()">Contato</a>
+  <a href="https://wa.me/5562983410308" class="mob-wpp" target="_blank">
+    <i class="fab fa-whatsapp"></i> Falar pelo WhatsApp
   </a>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     HERO
-══════════════════════════════════════════════════════════ -->
+<!-- ── HERO ─────────────────────────────────────────── -->
 <section id="hero">
-  <div class="container hero-inner">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
 
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <span></span>
+  <div class="wrap hero-body">
+    <div class="hero-text">
+      <div class="eyebrow">
+        <span style="width:20px;height:1.5px;background:var(--gold-lt);display:block;"></span>
         Residencial para a Melhor Idade — Anápolis, GO
       </div>
 
-      <h1 class="hero-title">
-        Cuidado, carinho e<br/>
-        <em>dignidade para<br/>quem você ama</em>
+      <h1 class="hero-h1">
+        Cuidado e carinho<br/>
+        <em>para quem você ama</em>
       </h1>
 
       <p class="hero-sub">
-        Um ambiente seguro, acolhedor e profissional, onde cada idoso recebe atenção especializada — e cada família pode respirar com tranquilidade.
+        Um ambiente seguro, acolhedor e profissional onde cada idoso recebe atenção especializada — e cada família vive com tranquilidade.
       </p>
 
       <div class="hero-actions">
-        <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita%20ao%20Residencial%20Bem%20Querer." class="btn btn-wpp" target="_blank">
+        <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita." class="btn btn-wpp" target="_blank">
           <i class="fab fa-whatsapp"></i> Agendar uma visita
         </a>
-        <a href="#sobre" class="btn btn-ghost">
-          Conheça a estrutura
-        </a>
+        <a href="#sobre" class="btn btn-ghost-light">Saiba mais</a>
       </div>
 
       <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-n">7+</span>
-          <span class="stat-l">Anos de atuação</span>
+        <div class="h-stat" style="padding-left:0">
+          <span class="h-stat-n">7+</span>
+          <span class="h-stat-l">Anos de cuidado</span>
         </div>
-        <div class="stat-sep"></div>
-        <div class="stat">
-          <span class="stat-n">7</span>
-          <span class="stat-l">Especialidades</span>
+        <div class="h-stat" style="padding-left:24px">
+          <span class="h-stat-n">7</span>
+          <span class="h-stat-l">Especialidades</span>
         </div>
-        <div class="stat-sep"></div>
-        <div class="stat">
-          <span class="stat-n">24h</span>
-          <span class="stat-l">Atendimento diário</span>
+        <div class="h-stat" style="padding-left:24px;border-right:none">
+          <span class="h-stat-n">24h</span>
+          <span class="h-stat-l">Atendimento</span>
         </div>
       </div>
     </div>
 
     <div class="hero-img-col">
-      <div class="hero-img-wrap">
-        <div class="hero-gold-line"></div>
-        <div class="hero-img-main">
-          <i class="fas fa-camera"></i>
-          <span>Foto da fachada / área principal</span>
-        </div>
-        <div class="hero-float-badge">
-          <div class="hfb-icon"><i class="fas fa-heart-pulse"></i></div>
-          <div class="hfb-text">
-            <strong>24h</strong>
-            <span>Cuidado contínuo</span>
+      <div class="hero-img-frame">
+        <i class="fas fa-camera"></i>
+        <span>Foto da fachada</span>
+        <div class="hero-card">
+          <div class="hc-icon"><i class="fas fa-heart-pulse"></i></div>
+          <div>
+            <span class="hc-n">24h</span>
+            <span class="hc-l">Cuidado contínuo</span>
           </div>
         </div>
       </div>
     </div>
-
-  </div>
-
-  <div class="scroll-hint">
-    <span>Saiba mais</span>
-    <i class="fas fa-chevron-down"></i>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     TRUST STRIP
-══════════════════════════════════════════════════════════ -->
+<!-- ── TRUST STRIP ──────────────────────────────────── -->
 <section id="trust">
-  <div class="container">
-    <div class="trust-inner">
-      <div class="trust-item reveal">
-        <div class="trust-icon"><i class="fas fa-user-doctor"></i></div>
-        <div class="trust-text">
-          <strong>Equipe médica</strong>
-          <span>Acompanhamento especializado</span>
-        </div>
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="trust-item up">
+        <div class="ti-icon"><i class="fas fa-user-doctor"></i></div>
+        <div class="ti-text"><strong>Equipe médica</strong><span>Acompanhamento especializado</span></div>
       </div>
-      <div class="trust-item reveal d1">
-        <div class="trust-icon"><i class="fas fa-shield-heart"></i></div>
-        <div class="trust-text">
-          <strong>Ambiente seguro</strong>
-          <span>Estrutura adaptada para idosos</span>
-        </div>
+      <div class="trust-item up d1">
+        <div class="ti-icon"><i class="fas fa-shield-heart"></i></div>
+        <div class="ti-text"><strong>Ambiente seguro</strong><span>Estrutura adaptada</span></div>
       </div>
-      <div class="trust-item reveal d2">
-        <div class="trust-icon"><i class="fas fa-family"></i></div>
-        <div class="trust-text">
-          <strong>Família tranquila</strong>
-          <span>Comunicação constante</span>
-        </div>
+      <div class="trust-item up d2">
+        <div class="ti-icon"><i class="fas fa-comments"></i></div>
+        <div class="ti-text"><strong>Família informada</strong><span>Comunicação constante</span></div>
       </div>
-      <div class="trust-item reveal d3">
-        <div class="trust-icon"><i class="fas fa-clock"></i></div>
-        <div class="trust-text">
-          <strong>Atendimento 24h</strong>
-          <span>Suporte ininterrupto</span>
-        </div>
+      <div class="trust-item up d3" style="border-right:1px solid var(--border-lt)">
+        <div class="ti-icon"><i class="fas fa-clock"></i></div>
+        <div class="ti-text"><strong>Atendimento 24h</strong><span>Suporte ininterrupto</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SOBRE NÓS
-══════════════════════════════════════════════════════════ -->
+<!-- ── SOBRE ─────────────────────────────────────────── -->
 <section id="sobre">
-  <div class="container">
+  <div class="wrap">
     <div class="sobre-grid">
 
-      <div class="sobre-img-col reveal">
-        <div class="sobre-img-main" style="min-height: 500px;">
+      <div class="sobre-img up">
+        <div class="sobre-ph ph">
           <i class="fas fa-camera"></i>
-          <span>Foto da estrutura / equipe</span>
+          <span>Foto da estrutura</span>
         </div>
-        <div class="img-accent"></div>
-        <div class="sobre-float">
+        <div class="sobre-img-accent"></div>
+        <div class="sobre-quote">
           <p>Um lar feito de afeto e cuidado profissional.</p>
         </div>
       </div>
 
-      <div class="reveal d2">
-        <span class="eyebrow">Sobre Nós</span>
-        <h2 style="margin-bottom:24px;">Um lar construído com <em>propósito e afeto</em></h2>
-        <p class="lead">
-          O Residencial Bem Querer nasceu da convicção de que envelhecer com dignidade é um direito. Oferecemos a estrutura de um residencial especializado com o calor e a atenção que só um ambiente familiar pode proporcionar.
-        </p>
-        <p class="lead" style="margin-top:16px;">
-          Nossa equipe multidisciplinar trabalha de forma integrada para garantir o bem-estar físico, emocional e social de cada residente — enquanto mantemos sua família informada e tranquila em cada etapa.
-        </p>
-
-        <div class="sobre-pills" style="margin-top:32px;">
+      <div class="sobre-text up d2">
+        <div class="eyebrow">Sobre Nós</div>
+        <h2>Um lar construído com <em>propósito</em></h2>
+        <p class="lead" style="margin-top:18px;">O Residencial Bem Querer nasceu com um único propósito: oferecer aos idosos um espaço onde se sintam verdadeiramente em casa — com segurança, conforto e atenção que merecem.</p>
+        <p class="lead" style="margin-top:14px;">Nossa equipe multidisciplinar trabalha de forma integrada para garantir bem-estar físico, emocional e social de cada residente, mantendo a família informada em cada etapa.</p>
+        <div class="sobre-pills">
           <span class="pill"><i class="fas fa-calendar-heart"></i> Desde 2019</span>
-          <span class="pill"><i class="fas fa-user-doctor"></i> Equipe Multidisciplinar</span>
-          <span class="pill"><i class="fas fa-house-heart"></i> Ambiente Familiar</span>
-          <span class="pill"><i class="fas fa-map-marker-alt"></i> Anápolis — GO</span>
+          <span class="pill"><i class="fas fa-user-doctor"></i> Equipe completa</span>
+          <span class="pill"><i class="fas fa-house-heart"></i> Ambiente familiar</span>
         </div>
       </div>
 
@@ -1031,389 +867,291 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     MODALIDADES
-══════════════════════════════════════════════════════════ -->
+<!-- ── MODALIDADES ──────────────────────────────────── -->
 <section id="servicos">
-  <div class="container">
-    <div class="servicos-header reveal">
-      <span class="eyebrow">Modalidades de Atendimento</span>
-      <h2>Como podemos <em>ajudar</em></h2>
+  <div class="wrap">
+    <div class="sec-hdr up">
+      <div class="eyebrow">Modalidades de Atendimento</div>
+      <h2 style="margin-top:14px;">Como podemos <em>ajudar sua família</em></h2>
     </div>
 
-    <div class="servicos-list">
-
-      <div class="service-row reveal d1">
+    <div class="svc-list">
+      <div class="svc-row up d1">
         <div class="svc-num">01</div>
-        <div class="svc-body">
+        <div class="svc-info">
           <h3>Residência Permanente</h3>
-          <p>Para quem precisa de um novo lar. O Bem Querer oferece acomodação completa, cuidados diários, refeições balanceadas, atividades terapêuticas e acompanhamento médico contínuo — em um ambiente seguro e acolhedor.</p>
+          <p>Para quem precisa de um novo lar. Oferecemos acomodação completa, cuidados diários, refeições balanceadas, atividades e acompanhamento médico contínuo em ambiente seguro e acolhedor.</p>
         </div>
         <div class="svc-tag"><i class="fas fa-home"></i> Longa permanência</div>
       </div>
-
-      <div class="service-row reveal d2">
+      <div class="svc-row up d2">
         <div class="svc-num">02</div>
-        <div class="svc-body">
+        <div class="svc-info">
           <h3>Estadias Temporárias</h3>
-          <p>Ideal para períodos de férias, feriados prolongados ou recuperação pós-operatória. Sua família descansa ou viaja com a certeza de que seu ente querido está sendo bem cuidado por profissionais qualificados.</p>
+          <p>Ideal para férias, feriados ou recuperação pós-operatória. Sua família descansa com a certeza de que seu ente querido está sendo bem cuidado por profissionais qualificados.</p>
         </div>
         <div class="svc-tag"><i class="fas fa-calendar-check"></i> Curta e média permanência</div>
       </div>
-
-      <div class="service-row reveal d3">
+      <div class="svc-row up d3">
         <div class="svc-num">03</div>
-        <div class="svc-body">
+        <div class="svc-info">
           <h3>Permanência Diária</h3>
-          <p>O idoso passa o dia com nossa equipe — participando de atividades, recebendo cuidados e desfrutando de companhia — e retorna para casa à noite. Uma solução prática para famílias que trabalham durante o dia.</p>
+          <p>O idoso passa o dia com nossa equipe — atividades, cuidados, companhia — e retorna para casa à noite. Solução prática para famílias que trabalham durante o dia.</p>
         </div>
         <div class="svc-tag"><i class="fas fa-sun"></i> Retorno noturno</div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     EQUIPE
-══════════════════════════════════════════════════════════ -->
+<!-- ── EQUIPE ─────────────────────────────────────────── -->
 <section id="equipe">
-  <div class="container">
-    <div class="equipe-header reveal">
-      <span class="eyebrow">Nossa Equipe</span>
-      <h2>Profissionais <em>dedicados</em> ao seu cuidado</h2>
-      <p class="lead" style="margin-top:14px; max-width:560px;">Uma equipe multidisciplinar completa trabalhando de forma integrada para garantir o bem-estar de cada residente.</p>
+  <div class="wrap">
+    <div class="equipe-intro up">
+      <div>
+        <div class="eyebrow">Nossa Equipe</div>
+        <h2 style="margin-top:14px;">Profissionais <em>dedicados</em></h2>
+      </div>
+      <p class="lead">Uma equipe multidisciplinar completa trabalhando de forma integrada pelo bem-estar de cada residente.</p>
     </div>
 
-    <div class="equipe-cats">
-
-      <!-- Saúde Médica -->
-      <div class="reveal d1">
-        <div class="cat-label">Saúde Médica</div>
-        <div class="cat-grid">
-          <div class="team-row">
-            <div class="team-icon med"><i class="fas fa-user-doctor"></i></div>
-            <div class="team-info">
-              <h4>Médico</h4>
-              <span>Acompanhamento clínico e prescrições</span>
-            </div>
-          </div>
-          <div class="team-row">
-            <div class="team-icon med"><i class="fas fa-syringe"></i></div>
-            <div class="team-info">
-              <h4>Técnico de Enfermagem</h4>
-              <span>Cuidados de saúde e monitoramento</span>
-            </div>
-          </div>
-          <div class="team-row">
-            <div class="team-icon med"><i class="fas fa-hands-holding-heart"></i></div>
-            <div class="team-info">
-              <h4>Cuidador</h4>
-              <span>Assistência e suporte diário</span>
-            </div>
-          </div>
+    <div class="cat-block up d1">
+      <div class="cat-label">Saúde Médica</div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="tc-icon med"><i class="fas fa-user-doctor"></i></div>
+          <div><div class="tc-name">Médico</div><div class="tc-role">Acompanhamento clínico</div></div>
+        </div>
+        <div class="team-card">
+          <div class="tc-icon med"><i class="fas fa-syringe"></i></div>
+          <div><div class="tc-name">Técnico de Enfermagem</div><div class="tc-role">Cuidados de saúde</div></div>
+        </div>
+        <div class="team-card">
+          <div class="tc-icon med"><i class="fas fa-hands-holding-heart"></i></div>
+          <div><div class="tc-name">Cuidador</div><div class="tc-role">Assistência diária</div></div>
         </div>
       </div>
+    </div>
 
-      <!-- Terapias -->
-      <div class="reveal d2">
-        <div class="cat-label">Terapias e Reabilitação</div>
-        <div class="cat-grid">
-          <div class="team-row">
-            <div class="team-icon ther"><i class="fas fa-person-walking-with-cane"></i></div>
-            <div class="team-info">
-              <h4>Fisioterapeuta</h4>
-              <span>Reabilitação, mobilidade e prevenção</span>
-            </div>
-          </div>
-          <div class="team-row">
-            <div class="team-icon ther"><i class="fas fa-puzzle-piece"></i></div>
-            <div class="team-info">
-              <h4>Terapeuta Ocupacional</h4>
-              <span>Autonomia e qualidade de vida</span>
-            </div>
-          </div>
-          <div class="team-row">
-            <div class="team-icon ther"><i class="fas fa-music"></i></div>
-            <div class="team-info">
-              <h4>Musicoterapeuta</h4>
-              <span>Bem-estar emocional e cognitivo</span>
-            </div>
-          </div>
+    <div class="cat-block up d2">
+      <div class="cat-label">Terapias e Reabilitação</div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="tc-icon ther"><i class="fas fa-person-walking-with-cane"></i></div>
+          <div><div class="tc-name">Fisioterapeuta</div><div class="tc-role">Reabilitação e mobilidade</div></div>
+        </div>
+        <div class="team-card">
+          <div class="tc-icon ther"><i class="fas fa-puzzle-piece"></i></div>
+          <div><div class="tc-name">Terapeuta Ocupacional</div><div class="tc-role">Autonomia e qualidade de vida</div></div>
+        </div>
+        <div class="team-card">
+          <div class="tc-icon ther"><i class="fas fa-music"></i></div>
+          <div><div class="tc-name">Musicoterapeuta</div><div class="tc-role">Bem-estar emocional</div></div>
         </div>
       </div>
+    </div>
 
-      <!-- Bem-estar -->
-      <div class="reveal d3">
-        <div class="cat-label">Nutrição e Bem-Estar</div>
-        <div class="cat-grid col-2">
-          <div class="team-row">
-            <div class="team-icon well"><i class="fas fa-apple-whole"></i></div>
-            <div class="team-info">
-              <h4>Nutricionista</h4>
-              <span>Cardápio personalizado e saudável</span>
-            </div>
-          </div>
+    <div class="cat-block up d3">
+      <div class="cat-label">Nutrição e Bem-Estar</div>
+      <div class="team-grid col2">
+        <div class="team-card">
+          <div class="tc-icon well"><i class="fas fa-apple-whole"></i></div>
+          <div><div class="tc-name">Nutricionista</div><div class="tc-role">Alimentação personalizada</div></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     DIFERENCIAIS
-══════════════════════════════════════════════════════════ -->
-<section id="diferenciais">
-  <div class="container">
-    <div class="dif-header reveal">
-      <span class="eyebrow">Por que o Bem Querer?</span>
-      <h2>O que nos torna <em>diferentes</em></h2>
+<!-- ── DIFERENCIAIS (dark) ──────────────────────────── -->
+<section id="dif">
+  <div class="wrap">
+    <div class="dif-top up">
+      <div>
+        <div class="eyebrow">Por que o Bem Querer?</div>
+        <h2 style="margin-top:14px;">O que nos torna <em>diferentes</em></h2>
+      </div>
+      <p class="lead">Cada detalhe do Residencial Bem Querer foi pensado para proporcionar o melhor cuidado e a maior tranquilidade para sua família.</p>
     </div>
 
     <div class="dif-grid">
-      <div class="dif-card reveal d1">
+      <div class="dif-item up d1">
         <div class="dif-icon"><i class="fas fa-clock"></i></div>
         <h4>Cuidado 24 Horas</h4>
-        <p>Nossa equipe está presente em todos os momentos, com suporte e assistência ininterruptos dia e noite.</p>
+        <p>Equipe presente em todos os momentos, garantindo segurança e assistência ininterruptas.</p>
       </div>
-      <div class="dif-card reveal d2">
+      <div class="dif-item up d2">
         <div class="dif-icon"><i class="fas fa-shield-heart"></i></div>
         <h4>Ambiente Seguro</h4>
-        <p>Estrutura totalmente adaptada para idosos, com acessibilidade, segurança e conforto em cada espaço.</p>
+        <p>Estrutura totalmente adaptada, com acessibilidade e segurança em cada espaço.</p>
       </div>
-      <div class="dif-card reveal d3">
+      <div class="dif-item up d3">
         <div class="dif-icon"><i class="fas fa-stethoscope"></i></div>
         <h4>Equipe Especializada</h4>
-        <p>Profissionais qualificados trabalhando de forma integrada para cuidar da saúde física e emocional.</p>
+        <p>Profissionais qualificados cuidando da saúde física e emocional de cada residente.</p>
       </div>
-      <div class="dif-card reveal d4">
+      <div class="dif-item up d4">
         <div class="dif-icon"><i class="fas fa-utensils"></i></div>
         <h4>Nutrição Individualizada</h4>
-        <p>Cardápio elaborado por nutricionista, adaptado às necessidades e restrições de cada residente.</p>
+        <p>Cardápio elaborado por nutricionista, adaptado às necessidades de cada pessoa.</p>
       </div>
-      <div class="dif-card reveal d5">
+      <div class="dif-item up d5">
         <div class="dif-icon"><i class="fas fa-person-running"></i></div>
         <h4>Atividades Terapêuticas</h4>
-        <p>Programação diária de atividades físicas, cognitivas e culturais para manter o corpo e a mente ativos.</p>
+        <p>Programação diária para manter corpo e mente ativos, saudáveis e estimulados.</p>
       </div>
-      <div class="dif-card reveal d6">
+      <div class="dif-item up d6">
         <div class="dif-icon"><i class="fas fa-comments"></i></div>
         <h4>Família Informada</h4>
-        <p>Comunicação transparente com a família: relatórios, atualizações e total abertura para visitas e dúvidas.</p>
+        <p>Comunicação transparente e constante com relatórios e total abertura para visitas.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     GALERIA
-══════════════════════════════════════════════════════════ -->
-<section id="estrutura">
-  <div class="container">
-    <div class="estrutura-header reveal">
-      <span class="eyebrow">Nossa Estrutura</span>
-      <h2>Um ambiente pensado <em>para você</em></h2>
-      <p class="lead" style="margin-top:12px; max-width:520px;">Espaços confortáveis, alegres e adaptados para o bem-estar e a autonomia de cada residente.</p>
+<!-- ── GALERIA ──────────────────────────────────────── -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="gal-top up">
+      <div class="eyebrow">Nossa Estrutura</div>
+      <h2 style="margin-top:14px;">Um ambiente pensado <em>para você</em></h2>
     </div>
-
-    <div class="galeria-grid">
-      <div class="g-item reveal d1"><div class="g-ph"><i class="fas fa-camera"></i><span>Área principal</span></div></div>
-      <div class="g-item reveal d2"><div class="g-ph"><i class="fas fa-camera"></i><span>Quartos</span></div></div>
-      <div class="g-item reveal d3"><div class="g-ph"><i class="fas fa-camera"></i><span>Área de lazer</span></div></div>
-      <div class="g-item reveal d4"><div class="g-ph"><i class="fas fa-camera"></i><span>Refeitório</span></div></div>
-      <div class="g-item reveal d5"><div class="g-ph"><i class="fas fa-camera"></i><span>Jardim</span></div></div>
+    <div class="gal-grid">
+      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Área principal</span></div></div>
+      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Quartos</span></div></div>
+      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Área de lazer</span></div></div>
+      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Refeitório</span></div></div>
+      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Jardim</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     CTA BAND
-══════════════════════════════════════════════════════════ -->
-<section id="cta-band">
-  <div class="container cta-band-inner">
-    <span class="eyebrow" style="justify-content:center;">Dê o primeiro passo</span>
+<!-- ── CTA BAND ─────────────────────────────────────── -->
+<section id="cta">
+  <div class="wrap cta-inner">
+    <div class="eyebrow">Dê o primeiro passo</div>
     <h2>Agende uma visita e<br/><em>conheça pessoalmente</em></h2>
-    <p>Venha conhecer nossa estrutura, nossa equipe e o ambiente que pode ser o novo lar do seu familiar.</p>
-    <div class="cta-band-actions">
+    <p>Venha conhecer nossa estrutura, nossa equipe e o ambiente que pode se tornar o lar do seu familiar.</p>
+    <div class="cta-actions">
       <a href="https://wa.me/5562983410308?text=Gostaria%20de%20agendar%20uma%20visita%20ao%20Residencial%20Bem%20Querer." class="btn btn-wpp" target="_blank">
         <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
       </a>
-      <a href="tel:6237029764" class="btn btn-ghost">
+      <a href="tel:6237029764" class="btn btn-ghost-light">
         <i class="fas fa-phone"></i> (62) 3702-9764
       </a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     DEPOIMENTOS
-══════════════════════════════════════════════════════════ -->
-<section id="depoimentos">
-  <div class="container">
-    <div class="dep-header reveal">
-      <span class="eyebrow">Depoimentos</span>
-      <h2>O que as <em>famílias</em> dizem</h2>
+<!-- ── DEPOIMENTOS ──────────────────────────────────── -->
+<section id="dep">
+  <div class="wrap">
+    <div class="dep-hdr up">
+      <div class="eyebrow">Depoimentos</div>
+      <h2 style="margin-top:14px;">O que as <em>famílias</em> dizem</h2>
     </div>
-
     <div class="dep-grid">
-
-      <div class="dep-card reveal d1">
-        <span class="dep-quote">"</span>
-        <div class="dep-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>A equipe do Bem Querer cuida da minha mãe com uma atenção que a gente raramente encontra. Sinto paz sabendo que ela está bem assistida e feliz.</p>
+      <div class="dep-card up d1">
+        <div class="dep-stars">★★★★★</div>
+        <span class="dep-quote-mark">"</span>
+        <p>A equipe cuida da minha mãe com uma atenção que raramente encontramos. Sinto paz sabendo que ela está bem assistida e feliz.</p>
         <div class="dep-author">
-          <div class="dep-avatar"><i class="fas fa-user"></i></div>
-          <div class="dep-name">
-            <strong>Família Silva</strong>
-            <span>Residente permanente</span>
-          </div>
+          <div class="dep-av"><i class="fas fa-user"></i></div>
+          <div class="dep-name"><strong>Família Silva</strong><span>Residente permanente</span></div>
         </div>
       </div>
-
-      <div class="dep-card reveal d2">
-        <span class="dep-quote">"</span>
-        <div class="dep-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>Deixamos nosso pai durante nossas férias e voltamos com total tranquilidade. A estrutura é excelente e a comunicação com a família é muito boa.</p>
+      <div class="dep-card up d2">
+        <div class="dep-stars">★★★★★</div>
+        <span class="dep-quote-mark">"</span>
+        <p>Deixamos nosso pai durante as férias e voltamos tranquilos. A estrutura é excelente e a comunicação com a família é muito boa.</p>
         <div class="dep-author">
-          <div class="dep-avatar"><i class="fas fa-user"></i></div>
-          <div class="dep-name">
-            <strong>Família Oliveira</strong>
-            <span>Estadia temporária</span>
-          </div>
+          <div class="dep-av"><i class="fas fa-user"></i></div>
+          <div class="dep-name"><strong>Família Oliveira</strong><span>Estadia temporária</span></div>
         </div>
       </div>
-
-      <div class="dep-card reveal d3">
-        <span class="dep-quote">"</span>
-        <div class="dep-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <p>Minha avó faz a permanência diária e chegou em casa me contando das atividades com um sorriso no rosto. Recomendo muito o Bem Querer.</p>
+      <div class="dep-card up d3">
+        <div class="dep-stars">★★★★★</div>
+        <span class="dep-quote-mark">"</span>
+        <p>Minha avó faz a permanência diária e chega em casa sorrindo. As atividades fazem toda a diferença. Recomendo muito o Bem Querer.</p>
         <div class="dep-author">
-          <div class="dep-avatar"><i class="fas fa-user"></i></div>
-          <div class="dep-name">
-            <strong>Família Costa</strong>
-            <span>Permanência diária</span>
-          </div>
+          <div class="dep-av"><i class="fas fa-user"></i></div>
+          <div class="dep-name"><strong>Família Costa</strong><span>Permanência diária</span></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     CONTATO
-══════════════════════════════════════════════════════════ -->
+<!-- ── CONTATO ──────────────────────────────────────── -->
 <section id="contato">
-  <div class="container">
+  <div class="wrap">
     <div class="contato-grid">
-
-      <div class="reveal">
-        <span class="eyebrow">Fale Conosco</span>
-        <h2 style="margin-bottom:14px;">Venha nos <em>conhecer</em></h2>
-        <p class="lead" style="margin-bottom:36px;">Estamos prontos para receber você e sua família. Entre em contato e agende uma visita sem compromisso.</p>
-
-        <div class="contact-list">
-          <div class="contact-row">
-            <div class="c-icon rose"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="c-info">
-              <strong>Endereço</strong>
-              <span>Rua Hugo de Carvalho Ramos, nº 300 — Jundiaí, Anápolis-GO — CEP 75.110-320</span>
-            </div>
+      <div class="contato-text up">
+        <div class="eyebrow">Fale Conosco</div>
+        <h2>Venha nos <em>conhecer</em></h2>
+        <p class="lead" style="margin-top:14px;">Estamos prontos para receber você e sua família. Entre em contato e agende uma visita sem compromisso.</p>
+        <div class="c-list" style="margin-top:28px;">
+          <div class="c-row">
+            <div class="c-ico p"><i class="fas fa-map-marker-alt"></i></div>
+            <div><span class="c-label">Endereço</span><span class="c-val">Rua Hugo de Carvalho Ramos, 300 — Jundiaí, Anápolis-GO</span></div>
           </div>
-
-          <a href="tel:6237029764" class="contact-row" style="cursor:pointer;">
-            <div class="c-icon rose"><i class="fas fa-phone"></i></div>
-            <div class="c-info">
-              <strong>Telefone</strong>
-              <span>(62) 3702-9764</span>
-            </div>
+          <a href="tel:6237029764" class="c-row" style="cursor:pointer">
+            <div class="c-ico p"><i class="fas fa-phone"></i></div>
+            <div><span class="c-label">Telefone</span><span class="c-val">(62) 3702-9764</span></div>
           </a>
-
-          <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Residencial%20Bem%20Querer." class="contact-row" style="cursor:pointer;" target="_blank">
-            <div class="c-icon green"><i class="fab fa-whatsapp"></i></div>
-            <div class="c-info">
-              <strong>WhatsApp</strong>
-              <span>(62) 9 8341-0308 — Clique para conversar</span>
-            </div>
+          <a href="https://wa.me/5562983410308" class="c-row" style="cursor:pointer" target="_blank">
+            <div class="c-ico g"><i class="fab fa-whatsapp"></i></div>
+            <div><span class="c-label">WhatsApp</span><span class="c-val">(62) 9 8341-0308 — Clique para conversar</span></div>
           </a>
-
-          <a href="mailto:bemquereranapolis@gmail.com" class="contact-row" style="cursor:pointer;">
-            <div class="c-icon rose"><i class="fas fa-envelope"></i></div>
-            <div class="c-info">
-              <strong>E-mail</strong>
-              <span>bemquereranapolis@gmail.com</span>
-            </div>
+          <a href="mailto:bemquereranapolis@gmail.com" class="c-row" style="cursor:pointer">
+            <div class="c-ico p"><i class="fas fa-envelope"></i></div>
+            <div><span class="c-label">E-mail</span><span class="c-val">bemquereranapolis@gmail.com</span></div>
           </a>
         </div>
       </div>
-
-      <div class="map-frame reveal d2">
-        <iframe
-          src="https://maps.google.com/maps?q=Rua+Hugo+de+Carvalho+Ramos,+300,+Jundiai,+Anapolis,+GO&output=embed"
-          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          title="Localização Residencial Bem Querer">
-        </iframe>
+      <div class="map-box up d2">
+        <iframe src="https://maps.google.com/maps?q=Rua+Hugo+de+Carvalho+Ramos,+300,+Jundiai,+Anapolis,+GO&output=embed"
+          allowfullscreen loading="lazy" title="Localização Residencial Bem Querer"></iframe>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════════════ -->
+<!-- ── FOOTER ───────────────────────────────────────── -->
 <footer id="footer">
-  <div class="container">
-    <div class="footer-top">
-
-      <div class="footer-brand">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="ft-brand">
         <img src="https://residencialbemquerer.com.br/wp-content/uploads/2021/02/asasasasas.png" alt="Residencial Bem Querer" />
-        <p>Cuidado especializado, ambiente acolhedor e equipe dedicada. Cada idoso merece viver com dignidade, carinho e alegria.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/5562983410308" class="social-btn" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <p>Cuidado especializado e ambiente acolhedor. Porque cada idoso merece viver com dignidade, carinho e alegria.</p>
+        <div class="ft-socials">
+          <a href="#" class="ft-soc"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="ft-soc"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/5562983410308" class="ft-soc" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
-
-      <div class="footer-col">
+      <div class="ft-col">
         <h5>Navegação</h5>
-        <ul class="footer-links">
+        <ul class="ft-links">
           <li><a href="#sobre">Sobre Nós</a></li>
           <li><a href="#servicos">Modalidades</a></li>
           <li><a href="#equipe">Nossa Equipe</a></li>
-          <li><a href="#estrutura">Estrutura</a></li>
-          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#galeria">Estrutura</a></li>
+          <li><a href="#dep">Depoimentos</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div class="ft-col">
         <h5>Contato</h5>
-        <div class="footer-contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Rua Hugo de Carvalho Ramos, 300 — Anápolis-GO</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fas fa-phone"></i>
-          <span>(62) 3702-9764</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fab fa-whatsapp"></i>
-          <span>(62) 9 8341-0308</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fas fa-envelope"></i>
-          <span>bemquereranapolis@gmail.com</span>
-        </div>
+        <div class="ft-item"><i class="fas fa-map-marker-alt"></i><span>Rua Hugo de Carvalho Ramos, 300 — Anápolis-GO</span></div>
+        <div class="ft-item"><i class="fas fa-phone"></i><span>(62) 3702-9764</span></div>
+        <div class="ft-item"><i class="fab fa-whatsapp"></i><span>(62) 9 8341-0308</span></div>
+        <div class="ft-item"><i class="fas fa-envelope"></i><span>bemquereranapolis@gmail.com</span></div>
       </div>
-
     </div>
-
-    <div class="footer-bottom">
+    <div class="footer-bot">
       <span>© 2024 Residencial Bem Querer. Todos os direitos reservados.</span>
-      <span>Anápolis — Goiás, Brasil</span>
+      <span>Anápolis — GO</span>
     </div>
   </div>
 </footer>
@@ -1422,48 +1160,38 @@
 <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Residencial%20Bem%20Querer."
    class="wpp-float" target="_blank" aria-label="WhatsApp">
   <i class="fab fa-whatsapp"></i>
-  <span class="wpp-label">Falar agora</span>
+  <span>Falar agora</span>
 </a>
 
-<!-- ═══════════════════════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════════════════════════ -->
 <script>
-  // Header scroll state
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
+  // Header scroll
+  const hdr = document.getElementById('hdr');
+  window.addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 60), { passive: true });
 
-  // Reveal on scroll
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-    });
+  // Reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  document.querySelectorAll('.up').forEach(el => obs.observe(el));
 
   // Mobile menu
-  const hamburger = document.getElementById('hamburger');
-  const mobileNav = document.getElementById('mobileNav');
-  const closeNav  = document.getElementById('closeNav');
-  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
-  closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
-  function closeMenu() { mobileNav.classList.remove('open'); }
+  const mob = document.getElementById('mobMenu');
+  document.getElementById('burger').onclick = () => mob.classList.add('open');
+  document.getElementById('mobClose').onclick = () => mob.classList.remove('open');
+  function closeMob() { mob.classList.remove('open'); }
 
-  // Active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks  = document.querySelectorAll('nav a');
+  // Nav active state
+  const secs = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.hdr-nav a');
   window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
-    navLinks.forEach(a => {
-      const isActive = a.getAttribute('href') === `#${current}`;
-      a.style.color = isActive ? 'var(--rose)' : '';
-      a.style.background = isActive ? 'var(--rose-pale)' : '';
+    let cur = '';
+    secs.forEach(s => { if (scrollY >= s.offsetTop - 130) cur = s.id; });
+    navAs.forEach(a => {
+      const active = a.getAttribute('href') === `#${cur}`;
+      a.style.color = active ? 'var(--purple)' : '';
+      a.style.background = active ? 'var(--purple-pale)' : '';
     });
   }, { passive: true });
 </script>
-
 </body>
 </html>
