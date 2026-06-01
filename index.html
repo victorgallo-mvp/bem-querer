@@ -6,720 +6,424 @@
   <title>Residencial Bem Querer | Cuidado e Acolhimento para a Melhor Idade</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    /* ── Reset ── */
+    :root {
+      --p:     #8B6EC8;   /* purple accent          */
+      --p-dk:  #6B50A8;   /* purple hover            */
+      --p-bg:  #F5F2FB;   /* ultralight purple tint  */
+      --p-bdr: #E2DAF5;   /* purple-tinted border    */
+
+      --ink:   #1A1A22;
+      --mid:   #52525C;
+      --muted: #8A8A96;
+      --line:  #EBEBED;
+
+      --white: #FFFFFF;
+      --off:   #FAFAFA;
+
+      --sans:  'Jost', system-ui, sans-serif;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+
+      --r: 10px;
+      --t: .22s cubic-bezier(.4,0,.2,1);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); color: var(--ink); background: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-    img { max-width: 100%; display: block; }
+    body { font-family: var(--sans); color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
 
-    /* ── Tokens ── */
-    :root {
-      /* Brand — used sparingly */
-      --purple:      #7A5CB8;
-      --purple-dk:   #5E429A;
-      --purple-pale: #F0EBF9;
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-      /* Gold accent */
-      --gold:        #A07A3A;
-      --gold-lt:     #C9A05A;
-
-      /* Neutrals — dominant */
-      --ink:         #111115;
-      --ink-mid:     #3C3C44;
-      --ink-muted:   #72727C;
-      --ink-faint:   #A4A4AC;
-      --bg:          #FAFAF8;
-      --cream:       #F4F1EC;
-      --border:      #E4E0D8;
-      --border-lt:   #EDEBE5;
-      --white:       #FFFFFF;
-
-      /* Dark section */
-      --dark-bg:     #13131A;
-      --dark-mid:    #1E1E28;
-
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans:  'Jost', system-ui, sans-serif;
-
-      --r-sm: 6px;
-      --r:    12px;
-      --r-lg: 20px;
-
-      --ease: cubic-bezier(.4, 0, .2, 1);
-      --t:    .25s var(--ease);
-    }
-
-    /* ── Layout ── */
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
-    @media (min-width: 768px) { .wrap { padding: 0 40px; } }
-
-    /* ── Typography ── */
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: .68rem; font-weight: 600; letter-spacing: .16em;
-      text-transform: uppercase; color: var(--purple);
-    }
-    .eyebrow::before { content: ''; width: 20px; height: 1.5px; background: var(--gold); }
-
-    h2 {
-      font-family: var(--serif); font-weight: 500;
-      font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; color: var(--ink);
-    }
-    h2 em { font-style: italic; font-weight: 400; }
-    h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; line-height: 1.2; }
-
-    .lead { font-size: 1rem; line-height: 1.8; color: var(--ink-mid); font-weight: 300; }
-
-    /* ── Buttons ── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 13px 26px; border-radius: 50px; font-family: var(--sans);
-      font-size: .85rem; font-weight: 600; letter-spacing: .02em;
-      border: none; cursor: pointer; transition: all var(--t); white-space: nowrap;
-    }
-    .btn-purple {
-      background: var(--purple); color: var(--white);
-      box-shadow: 0 4px 18px rgba(122,92,184,.22);
-    }
-    .btn-purple:hover { background: var(--purple-dk); transform: translateY(-2px); }
-
-    .btn-wpp {
-      background: #25C26E; color: var(--white);
-      box-shadow: 0 4px 18px rgba(37,194,110,.22);
-    }
-    .btn-wpp:hover { background: #1EA85D; transform: translateY(-2px); }
-
-    .btn-outline {
-      background: transparent; color: var(--ink-mid);
-      border: 1.5px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--ink-mid); }
-
-    .btn-ghost-light {
-      background: rgba(255,255,255,.12); color: var(--white);
-      border: 1.5px solid rgba(255,255,255,.35);
-      backdrop-filter: blur(4px);
-    }
-    .btn-ghost-light:hover { background: rgba(255,255,255,.22); }
-
-    /* ── Placeholder image ── */
-    .ph {
-      background: var(--cream); border: 1.5px dashed var(--border);
-      border-radius: var(--r-lg);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 10px; color: var(--ink-faint);
-    }
-    .ph i { font-size: 1.8rem; opacity: .5; }
-    .ph span { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
-
-    /* ── Animations ── */
-    .up { opacity: 0; transform: translateY(22px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    /* ── Reveal ── */
+    .up { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
     .up.in { opacity: 1; transform: none; }
-    .up.d1 { transition-delay: .07s; } .up.d2 { transition-delay: .14s; }
-    .up.d3 { transition-delay: .21s; } .up.d4 { transition-delay: .28s; }
-    .up.d5 { transition-delay: .35s; } .up.d6 { transition-delay: .42s; }
+    .up.d1 { transition-delay: .06s; } .up.d2 { transition-delay: .12s; }
+    .up.d3 { transition-delay: .18s; } .up.d4 { transition-delay: .24s; }
+    .up.d5 { transition-delay: .30s; } .up.d6 { transition-delay: .36s; }
 
-    /* ════════════════════════════════════════
-       HEADER
-    ════════════════════════════════════════ */
+    /* ════════════ HEADER ════════════ */
     #hdr {
       position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-      padding: 16px 0;
-      transition: background var(--t), box-shadow var(--t), padding var(--t), border-color var(--t);
-      border-bottom: 1px solid transparent;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      padding: 0;
+      transition: box-shadow var(--t);
     }
-    #hdr.on {
-      background: rgba(250,250,248,.95); backdrop-filter: blur(14px);
-      border-color: var(--border-lt); box-shadow: 0 1px 20px rgba(0,0,0,.05);
-      padding: 12px 0;
+    #hdr.on { box-shadow: 0 1px 16px rgba(0,0,0,.06); }
+
+    .hdr-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      height: 64px; gap: 16px;
     }
 
-    .hdr-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-
-    .hdr-logo img {
-      height: 50px; width: auto; object-fit: contain;
-      transition: height var(--t), filter var(--t);
-    }
-    #hdr.on .hdr-logo img { height: 42px; }
+    .hdr-logo img { height: 44px; width: auto; object-fit: contain; }
 
     .hdr-nav { display: none; }
-    @media (min-width: 900px) {
-      .hdr-nav { display: flex; align-items: center; gap: 2px; }
-    }
+    @media (min-width: 860px) { .hdr-nav { display: flex; align-items: center; gap: 2px; } }
+
     .hdr-nav a {
-      font-size: .82rem; font-weight: 500; color: var(--white);
-      padding: 7px 13px; border-radius: var(--r-sm); transition: all var(--t);
+      font-size: .8rem; font-weight: 500; color: var(--mid);
+      padding: 6px 12px; border-radius: 6px; transition: all var(--t);
+      letter-spacing: .01em;
     }
-    #hdr.on .hdr-nav a { color: var(--ink-mid); }
-    .hdr-nav a:hover { background: var(--purple-pale); color: var(--purple) !important; }
+    .hdr-nav a:hover { color: var(--p); background: var(--p-bg); }
 
     .hdr-wpp {
-      display: none;
-      align-items: center; gap: 8px;
-      background: #25C26E; color: var(--white) !important;
-      padding: 8px 18px; border-radius: 50px;
-      font-size: .8rem; font-weight: 600;
-      box-shadow: 0 2px 12px rgba(37,194,110,.25);
+      display: none; align-items: center; gap: 7px;
+      background: var(--p); color: var(--white);
+      padding: 8px 16px; border-radius: 50px;
+      font-size: .78rem; font-weight: 600;
       transition: all var(--t);
     }
-    @media (min-width: 900px) { .hdr-wpp { display: flex; } }
-    .hdr-wpp:hover { background: #1EA85D !important; transform: translateY(-1px); }
+    @media (min-width: 860px) { .hdr-wpp { display: flex; } }
+    .hdr-wpp:hover { background: var(--p-dk); }
 
-    .hdr-burger {
-      display: flex; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px; background: none; border: none;
-    }
-    @media (min-width: 900px) { .hdr-burger { display: none; } }
-    .hdr-burger span {
-      display: block; width: 22px; height: 2px;
-      background: var(--white); border-radius: 2px; transition: var(--t);
-    }
-    #hdr.on .hdr-burger span { background: var(--ink); }
+    .hdr-burger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 6px; }
+    @media (min-width: 860px) { .hdr-burger { display: none; } }
+    .hdr-burger span { display: block; width: 20px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: var(--t); }
 
-    /* Mobile menu overlay */
-    .mob-menu {
-      display: none; position: fixed; inset: 0; z-index: 850;
-      background: var(--white); flex-direction: column;
-      align-items: center; justify-content: center; gap: 28px;
-    }
-    .mob-menu.open { display: flex; }
-    .mob-menu a { font-family: var(--serif); font-size: 2rem; font-weight: 500; color: var(--ink); }
-    .mob-menu a:hover { color: var(--purple); }
-    .mob-close {
-      position: absolute; top: 18px; right: 18px;
-      background: none; border: none; font-size: 1.5rem;
-      cursor: pointer; color: var(--ink-muted); padding: 8px;
-    }
+    /* Mobile menu */
+    .mob { display: none; position: fixed; inset: 0; z-index: 850; background: var(--white); flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+    .mob.open { display: flex; }
+    .mob a { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; color: var(--ink); transition: color var(--t); }
+    .mob a:hover { color: var(--p); }
+    .mob-close { position: absolute; top: 18px; right: 20px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--muted); }
     .mob-wpp {
-      display: flex; align-items: center; gap: 10px;
-      background: #25C26E; color: var(--white) !important;
-      padding: 14px 28px; border-radius: 50px;
-      font-size: 1rem; font-weight: 600; margin-top: 8px;
+      font-family: var(--sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+      background: var(--p) !important; color: var(--white) !important;
+      padding: 12px 28px !important; border-radius: 50px; margin-top: 8px;
     }
 
-    /* ════════════════════════════════════════
-       HERO
-    ════════════════════════════════════════ */
+    /* ════════════ HERO ════════════ */
     #hero {
-      min-height: 100svh;
-      background: var(--dark-bg);
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 100px 0 0;
-      position: relative; overflow: hidden;
-    }
-
-    /* Subtle radial glow */
-    .hero-glow {
-      position: absolute; top: -20%; right: -10%;
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(122,92,184,.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-glow-2 {
-      position: absolute; bottom: 20%; left: -10%;
-      width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(122,92,184,.10) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-body {
-      position: relative; z-index: 2;
-      display: grid; grid-template-columns: 1fr;
-      gap: 40px; align-items: end;
-      padding-bottom: 60px;
-    }
-    @media (min-width: 900px) {
-      .hero-body { grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding-bottom: 80px; }
-    }
-
-    .hero-text .eyebrow { color: var(--gold-lt); margin-bottom: 20px; display: flex; }
-    .hero-text .eyebrow::before { background: var(--gold-lt); }
-
-    .hero-h1 {
-      font-family: var(--serif);
-      font-size: clamp(2.6rem, 6vw, 4.2rem);
-      font-weight: 400; line-height: 1.1; color: var(--white);
-      margin-bottom: 20px;
-    }
-    .hero-h1 em { font-style: italic; color: rgba(255,255,255,.55); }
-
-    .hero-sub {
-      font-size: .95rem; font-weight: 300; line-height: 1.8;
-      color: rgba(255,255,255,.55); margin-bottom: 36px; max-width: 440px;
-    }
-
-    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-
-    .hero-stats {
-      display: flex; gap: 0;
-      border-top: 1px solid rgba(255,255,255,.1);
-      margin-top: 48px; padding-top: 0;
-    }
-    .h-stat {
-      flex: 1; padding: 24px 0;
-      border-right: 1px solid rgba(255,255,255,.08);
-    }
-    .h-stat:last-child { border-right: none; }
-    .h-stat-n {
-      font-family: var(--serif); font-size: 2rem; font-weight: 400;
-      color: var(--white); display: block; line-height: 1;
-    }
-    .h-stat-l {
-      font-size: .68rem; font-weight: 500; letter-spacing: .12em;
-      text-transform: uppercase; color: rgba(255,255,255,.38);
-      display: block; margin-top: 6px;
-    }
-
-    /* Hero image col */
-    .hero-img-col { display: none; }
-    @media (min-width: 900px) { .hero-img-col { display: flex; justify-content: flex-end; } }
-
-    .hero-img-frame {
-      width: 100%; max-width: 420px;
-      aspect-ratio: 3/4; border-radius: 20px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 12px; color: rgba(255,255,255,.25);
-      position: relative;
-    }
-    .hero-img-frame i { font-size: 2rem; }
-    .hero-img-frame span { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; }
-
-    /* Gold accent bar */
-    .hero-img-frame::before {
-      content: '';
-      position: absolute; right: -16px; top: 40px;
-      width: 2px; height: 100px;
-      background: linear-gradient(to bottom, transparent, var(--gold-lt), transparent);
-    }
-
-    /* Floating card */
-    .hero-card {
-      position: absolute; bottom: -20px; left: -36px;
-      background: var(--white); border-radius: var(--r);
-      padding: 16px 20px; display: flex; align-items: center; gap: 14px;
-      box-shadow: 0 16px 48px rgba(0,0,0,.3); min-width: 185px;
-    }
-    .hc-icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: var(--purple-pale); color: var(--purple);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .hc-n { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; line-height: 1; display: block; }
-    .hc-l { font-size: .72rem; color: var(--ink-muted); display: block; margin-top: 2px; }
-
-    /* ════════════════════════════════════════
-       TRUST STRIP
-    ════════════════════════════════════════ */
-    #trust {
+      padding: 120px 0 80px;
       background: var(--white);
-      border-bottom: 1px solid var(--border-lt);
     }
+    @media (min-width: 860px) { #hero { padding: 140px 0 100px; } }
 
-    .trust-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-left: 1px solid var(--border-lt);
-    }
-    @media (min-width: 640px) { .trust-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    .trust-item {
-      padding: 24px 20px;
-      border-right: 1px solid var(--border-lt);
-      border-bottom: 1px solid var(--border-lt);
-      display: flex; align-items: center; gap: 14px;
-    }
-    @media (min-width: 640px) { .trust-item { border-bottom: none; } }
-
-    .ti-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .95rem; color: var(--purple);
-    }
-    .ti-text strong { display: block; font-size: .85rem; font-weight: 600; color: var(--ink); }
-    .ti-text span { font-size: .75rem; color: var(--ink-muted); }
-
-    /* ════════════════════════════════════════
-       SOBRE
-    ════════════════════════════════════════ */
-    #sobre { padding: 80px 0; }
-    @media (min-width: 768px) { #sobre { padding: 110px 0; } }
-
-    .sobre-grid {
+    .hero-grid {
       display: grid; grid-template-columns: 1fr;
       gap: 48px; align-items: center;
     }
-    @media (min-width: 768px) { .sobre-grid { grid-template-columns: 1fr 1fr; gap: 80px; } }
+    @media (min-width: 860px) { .hero-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
 
-    .sobre-img { position: relative; }
-    .sobre-ph { width: 100%; aspect-ratio: 4/5; }
-    .sobre-img-accent {
-      display: none;
-      position: absolute; bottom: -16px; right: -16px;
-      width: 120px; height: 120px; border-radius: 14px;
-      border: 1.5px solid var(--gold-lt); z-index: -1;
+    .hero-eyebrow {
+      font-size: .68rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--p);
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
     }
-    @media (min-width: 768px) { .sobre-img-accent { display: block; } }
+    .hero-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--p); }
 
-    .sobre-quote {
-      display: none;
-      position: absolute; top: 28px; left: -24px;
-      background: var(--purple); border-radius: var(--r);
-      padding: 16px 20px; max-width: 180px;
-      box-shadow: 0 12px 36px rgba(122,92,184,.3);
+    .hero-h1 {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      line-height: 1.12; color: var(--ink); margin-bottom: 20px;
     }
-    @media (min-width: 768px) { .sobre-quote { display: block; } }
-    .sobre-quote p { font-family: var(--serif); font-size: .92rem; font-style: italic; color: rgba(255,255,255,.9); line-height: 1.55; }
+    .hero-h1 em { font-style: italic; color: var(--p); font-weight: 300; }
 
-    .sobre-text .eyebrow { margin-bottom: 16px; }
-    .sobre-text h2 { margin-bottom: 20px; }
-    .sobre-text .lead { margin-bottom: 16px; }
-
-    .sobre-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--cream); border: 1px solid var(--border);
-      color: var(--ink-mid); font-size: .75rem; font-weight: 500;
-      padding: 7px 13px; border-radius: 50px;
+    .hero-sub {
+      font-size: .93rem; font-weight: 300; line-height: 1.8;
+      color: var(--mid); margin-bottom: 32px; max-width: 400px;
     }
-    .pill i { color: var(--gold); font-size: .8rem; }
 
-    /* ════════════════════════════════════════
-       MODALIDADES
-    ════════════════════════════════════════ */
-    #servicos { background: var(--cream); padding: 80px 0; }
-    @media (min-width: 768px) { #servicos { padding: 110px 0; } }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 50px; font-family: var(--sans);
+      font-size: .82rem; font-weight: 600; cursor: pointer; border: none;
+      transition: all var(--t); white-space: nowrap;
+    }
+    .btn-p { background: var(--p); color: var(--white); }
+    .btn-p:hover { background: var(--p-dk); transform: translateY(-1px); }
+    .btn-wpp { background: #22C55E; color: var(--white); }
+    .btn-wpp:hover { background: #16A34A; transform: translateY(-1px); }
+    .btn-ol { background: transparent; color: var(--mid); border: 1px solid var(--line); }
+    .btn-ol:hover { border-color: var(--p-bdr); color: var(--p); }
+    .btn-wpp-ol { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.5); }
+    .btn-wpp-ol:hover { background: rgba(255,255,255,.1); }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 44px;
+      padding-top: 32px; border-top: 1px solid var(--line);
+    }
+    .hs-n { font-family: var(--serif); font-size: 2rem; font-weight: 400; display: block; color: var(--ink); line-height: 1; }
+    .hs-l { font-size: .68rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-top: 5px; }
+
+    /* Hero image */
+    .hero-img {
+      width: 100%; aspect-ratio: 4/5;
+      border-radius: 16px;
+      background: var(--p-bg);
+      border: 1px solid var(--p-bdr);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px; color: var(--p-bdr);
+    }
+    .hero-img i { font-size: 2rem; opacity: .6; color: var(--p); opacity: .3; }
+    .hero-img span { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+    /* ════════════ DIVIDER ════════════ */
+    .divider { height: 1px; background: var(--line); }
+
+    /* ════════════ TRUST ════════════ */
+    #trust { background: var(--white); }
+
+    .trust-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+    }
+    @media (min-width: 640px) { .trust-row { grid-template-columns: repeat(4, 1fr); } }
+
+    .trust-item {
+      padding: 28px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ti-ico { font-size: .9rem; color: var(--p); width: 18px; text-align: center; flex-shrink: 0; }
+    .ti-t strong { display: block; font-size: .83rem; font-weight: 600; color: var(--ink); }
+    .ti-t span { font-size: .72rem; color: var(--muted); }
+
+    /* ════════════ SECTIONS ════════════ */
+    .sec { padding: 80px 0; }
+    @media (min-width: 768px) { .sec { padding: 100px 0; } }
+    .sec-alt { background: var(--p-bg); }
 
     .sec-hdr { margin-bottom: 48px; }
-    .sec-hdr .eyebrow { margin-bottom: 14px; }
 
-    .svc-list { border-top: 1px solid var(--border); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: .65rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--p); margin-bottom: 12px;
+    }
+    .eyebrow::before { content: ''; width: 16px; height: 1px; background: var(--p); }
 
+    h2 {
+      font-family: var(--serif); font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 400; line-height: 1.15; color: var(--ink);
+    }
+    h2 em { font-style: italic; color: var(--p); }
+
+    .sub { font-size: .93rem; font-weight: 300; color: var(--mid); line-height: 1.75; }
+
+    /* ════════════ SOBRE ════════════ */
+    .sobre-grid {
+      display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center;
+    }
+    @media (min-width: 768px) { .sobre-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+
+    .sobre-img-box {
+      width: 100%; aspect-ratio: 4/5;
+      background: var(--p-bg); border: 1px solid var(--p-bdr);
+      border-radius: 16px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .sobre-img-box i { font-size: 1.8rem; color: var(--p); opacity: .25; }
+    .sobre-img-box span { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+    .sobre-text h2 { margin-bottom: 18px; }
+    .sobre-text .sub { margin-bottom: 14px; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .72rem; font-weight: 500; color: var(--p);
+      background: var(--p-bg); border: 1px solid var(--p-bdr);
+      padding: 6px 12px; border-radius: 50px;
+    }
+
+    /* ════════════ SERVIÇOS ════════════ */
+    .svc-list { border-top: 1px solid var(--line); }
     .svc-row {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 20px; padding: 32px 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
+      display: grid; grid-template-columns: 40px 1fr;
+      gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--line);
       transition: var(--t);
     }
-    @media (min-width: 640px) {
-      .svc-row { grid-template-columns: 64px 1fr auto; gap: 28px; align-items: center; }
-    }
+    @media (min-width: 640px) { .svc-row { grid-template-columns: 56px 1fr auto; gap: 28px; align-items: center; } }
+    .svc-row:hover { padding-left: 8px; }
 
-    .svc-num {
-      font-family: var(--serif); font-size: 2.4rem; font-weight: 400;
-      color: var(--border); line-height: 1; padding-top: 4px;
-    }
-
-    .svc-info h3 { margin-bottom: 8px; color: var(--ink); }
-    .svc-info p { font-size: .88rem; line-height: 1.7; color: var(--ink-muted); max-width: 520px; }
-
+    .svc-n { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--p-bdr); line-height: 1; }
+    .svc-row h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; margin-bottom: 6px; color: var(--ink); }
+    .svc-row p { font-size: .85rem; line-height: 1.7; color: var(--mid); font-weight: 300; max-width: 480px; }
     .svc-tag {
-      display: none;
-      align-items: center; gap: 6px;
-      background: var(--white); border: 1px solid var(--border);
-      color: var(--ink-muted); font-size: .72rem; font-weight: 600;
-      padding: 7px 14px; border-radius: 50px; letter-spacing: .05em;
-      white-space: nowrap;
+      display: none; align-items: center; gap: 5px;
+      font-size: .68rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--p); background: var(--p-bg); border: 1px solid var(--p-bdr);
+      padding: 6px 12px; border-radius: 50px; white-space: nowrap;
     }
     @media (min-width: 640px) { .svc-tag { display: flex; } }
-    .svc-tag i { color: var(--purple); }
 
-    /* ════════════════════════════════════════
-       EQUIPE
-    ════════════════════════════════════════ */
-    #equipe { padding: 80px 0; }
-    @media (min-width: 768px) { #equipe { padding: 110px 0; } }
-
-    .equipe-intro { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px; }
-    @media (min-width: 768px) { .equipe-intro { grid-template-columns: 1fr 1fr; align-items: end; } }
-    .equipe-intro h2 { margin-top: 14px; }
-
-    .cat-block { margin-bottom: 36px; }
-    .cat-label {
-      font-size: .68rem; font-weight: 600; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--ink-faint);
-      display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+    /* ════════════ EQUIPE ════════════ */
+    .cat-hdr {
+      font-size: .62rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; gap: 12px; margin-bottom: 12px; margin-top: 36px;
     }
-    .cat-label::after { content: ''; flex: 1; height: 1px; background: var(--border-lt); }
+    .cat-hdr::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+    .cat-hdr:first-child { margin-top: 0; }
 
-    .team-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-    @media (min-width: 640px) { .team-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
-    .team-grid.col2 { }
-    @media (min-width: 900px) { .team-grid.col2 { grid-template-columns: 1fr 1fr; } }
+    .team-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
+    @media (min-width: 560px) { .team-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 860px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+    .team-grid.g2 { }
+    @media (min-width: 860px) { .team-grid.g2 { grid-template-columns: 1fr 1fr; } }
 
-    .team-card {
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 18px; border-radius: var(--r);
-      border: 1px solid var(--border-lt); transition: var(--t);
+    .tc {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px; border-radius: var(--r);
+      border: 1px solid var(--line); transition: var(--t);
     }
-    .team-card:hover { border-color: var(--border); background: var(--cream); }
-
-    .tc-icon {
-      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    .tc:hover { border-color: var(--p-bdr); background: var(--p-bg); }
+    .tc-ico {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: .85rem;
+      background: var(--p-bg); color: var(--p);
     }
-    .tc-icon.med  { background: #F0EBF9; color: var(--purple); }
-    .tc-icon.ther { background: #EBF4F9; color: #3A7FA8; }
-    .tc-icon.well { background: #EDF5EE; color: #3A8A4A; }
+    .tc-n { font-size: .85rem; font-weight: 600; color: var(--ink); }
+    .tc-r { font-size: .72rem; color: var(--muted); margin-top: 1px; }
 
-    .tc-name { font-size: .88rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
-    .tc-role { font-size: .75rem; color: var(--ink-muted); margin-top: 2px; }
+    /* ════════════ DIFERENCIAIS ════════════ */
+    .dif-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    @media (min-width: 768px) { .dif-grid { grid-template-columns: repeat(3, 1fr); } }
 
-    /* ════════════════════════════════════════
-       DIFERENCIAIS — dark section
-    ════════════════════════════════════════ */
-    #dif {
-      background: var(--dark-bg);
-      padding: 80px 0;
-    }
-    @media (min-width: 768px) { #dif { padding: 110px 0; } }
+    .dif-item { background: var(--white); padding: 28px 24px; transition: background var(--t); }
+    .dif-item:hover { background: var(--p-bg); }
+    .dif-ico { font-size: .9rem; color: var(--p); margin-bottom: 14px; }
+    .dif-item h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; }
+    .dif-item p { font-size: .8rem; color: var(--mid); line-height: 1.65; font-weight: 300; }
 
-    .dif-top { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 56px; }
-    @media (min-width: 768px) { .dif-top { grid-template-columns: 1fr 1fr; align-items: end; } }
-    .dif-top .eyebrow { color: var(--gold-lt); }
-    .dif-top .eyebrow::before { background: var(--gold-lt); }
-    .dif-top h2 { color: var(--white); margin-top: 14px; }
-    .dif-top h2 em { color: rgba(255,255,255,.4); }
-    .dif-top .lead { color: rgba(255,255,255,.45); align-self: end; }
-
-    .dif-grid {
-      display: grid; grid-template-columns: 1fr;
-      gap: 1px; background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: var(--r-lg); overflow: hidden;
-    }
-    @media (min-width: 640px) { .dif-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .dif-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .dif-item {
-      padding: 36px 28px;
-      background: var(--dark-bg);
-      transition: background var(--t);
-    }
-    .dif-item:hover { background: var(--dark-mid); }
-
-    .dif-icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: rgba(122,92,184,.15); color: rgba(195,170,230,.8);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; margin-bottom: 18px;
-    }
-    .dif-item h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--white); margin-bottom: 8px; }
-    .dif-item p { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.7; }
-
-    /* ════════════════════════════════════════
-       GALERIA
-    ════════════════════════════════════════ */
-    #galeria { padding: 80px 0; background: var(--white); }
-    @media (min-width: 768px) { #galeria { padding: 110px 0; } }
-
-    .gal-top { margin-bottom: 36px; }
-    .gal-top .eyebrow { margin-bottom: 14px; }
-
+    /* ════════════ GALERIA ════════════ */
     .gal-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 180px 180px;
+      display: grid; grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
     @media (min-width: 640px) {
       .gal-grid {
         grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: 240px 240px;
-        gap: 12px;
+        grid-template-rows: 220px 220px;
       }
-      .gal-item:nth-child(1) { grid-column: 1 / 6;  grid-row: 1 / 3; }
-      .gal-item:nth-child(2) { grid-column: 6 / 9;  grid-row: 1 / 2; }
-      .gal-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1 / 2; }
-      .gal-item:nth-child(4) { grid-column: 6 / 10; grid-row: 2 / 3; }
-      .gal-item:nth-child(5) { grid-column: 10 / 13;grid-row: 2 / 3; }
+      .gal-grid .gi:nth-child(1) { grid-column: 1/6;  grid-row: 1/3; }
+      .gal-grid .gi:nth-child(2) { grid-column: 6/9;  grid-row: 1/2; }
+      .gal-grid .gi:nth-child(3) { grid-column: 9/13; grid-row: 1/2; }
+      .gal-grid .gi:nth-child(4) { grid-column: 6/10; grid-row: 2/3; }
+      .gal-grid .gi:nth-child(5) { grid-column: 10/13;grid-row: 2/3; }
     }
+    @media (max-width: 639px) { .gal-grid .gi:nth-child(1) { grid-column: 1/-1; } }
 
-    .gal-item { border-radius: var(--r); overflow: hidden; }
-    .gal-ph {
-      width: 100%; height: 100%;
-      background: var(--cream); border: 1.5px dashed var(--border);
-      border-radius: var(--r);
+    .gi { border-radius: 10px; overflow: hidden; }
+    .gi-ph {
+      width: 100%; height: 100%; min-height: 150px;
+      background: var(--p-bg); border: 1px solid var(--p-bdr);
+      border-radius: 10px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 8px; color: var(--ink-faint); transition: var(--t);
+      gap: 8px; color: var(--muted); transition: var(--t);
     }
-    .gal-ph:hover { background: var(--purple-pale); border-color: rgba(122,92,184,.2); }
-    .gal-ph i { font-size: 1.4rem; opacity: .5; }
-    .gal-ph span { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
+    .gi-ph:hover { background: var(--p-bdr); }
+    .gi-ph i { font-size: 1.3rem; opacity: .4; }
+    .gi-ph span { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
 
-    /* Mobile: all equal */
-    @media (max-width: 639px) {
-      .gal-item:nth-child(1) { grid-column: 1 / -1; }
-    }
+    /* ════════════ CTA BAND ════════════ */
+    #cta { background: var(--p); padding: 72px 0; text-align: center; }
+    .cta-eyebrow { color: rgba(255,255,255,.55); font-size: .65rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 9px; margin-bottom: 16px; }
+    .cta-eyebrow::before { content: ''; width: 16px; height: 1px; background: rgba(255,255,255,.4); }
+    #cta h2 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; color: var(--white); margin-bottom: 12px; }
+    #cta h2 em { color: rgba(255,255,255,.6); }
+    #cta p { font-size: .88rem; color: rgba(255,255,255,.6); font-weight: 300; margin-bottom: 32px; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
 
-    /* ════════════════════════════════════════
-       CTA BAND — the one purple section
-    ════════════════════════════════════════ */
-    #cta {
-      background: var(--purple);
-      padding: 72px 0; text-align: center;
-    }
-
-    .cta-inner .eyebrow { color: rgba(255,255,255,.6); margin-bottom: 16px; justify-content: center; }
-    .cta-inner .eyebrow::before { background: rgba(255,255,255,.4); }
-    .cta-inner h2 { color: var(--white); margin-bottom: 12px; font-size: clamp(1.7rem, 3.5vw, 2.4rem); }
-    .cta-inner p { color: rgba(255,255,255,.65); font-size: .95rem; margin-bottom: 32px; font-weight: 300; }
-    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
-
-    /* ════════════════════════════════════════
-       DEPOIMENTOS
-    ════════════════════════════════════════ */
-    #dep { padding: 80px 0; background: var(--cream); }
-    @media (min-width: 768px) { #dep { padding: 110px 0; } }
-
-    .dep-hdr { margin-bottom: 40px; }
-    .dep-hdr .eyebrow { margin-bottom: 14px; }
-
-    .dep-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 640px) { .dep-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .dep-grid { grid-template-columns: repeat(3, 1fr); } }
+    /* ════════════ DEPOIMENTOS ════════════ */
+    .dep-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 560px) { .dep-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 860px) { .dep-grid { grid-template-columns: repeat(3, 1fr); } }
 
     .dep-card {
-      background: var(--white); border-radius: var(--r);
-      border: 1px solid var(--border-lt); padding: 28px;
-      transition: var(--t);
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: var(--r); padding: 24px; transition: var(--t);
     }
-    .dep-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.06); transform: translateY(-3px); }
-
-    .dep-stars { color: var(--gold); font-size: .75rem; margin-bottom: 14px; letter-spacing: .1em; }
-    .dep-quote-mark {
-      font-family: var(--serif); font-size: 3.5rem; line-height: .6;
-      color: var(--border); display: block; margin-bottom: 14px;
-    }
-    .dep-card p { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink-mid); line-height: 1.6; margin-bottom: 24px; }
+    .dep-card:hover { border-color: var(--p-bdr); }
+    .dep-stars { color: var(--p); font-size: .72rem; letter-spacing: .08em; margin-bottom: 12px; opacity: .7; }
+    .dep-q { font-family: var(--serif); font-size: 3rem; line-height: .5; color: var(--p-bdr); margin-bottom: 12px; display: block; }
+    .dep-card p { font-family: var(--serif); font-style: italic; font-size: .98rem; font-weight: 300; color: var(--mid); line-height: 1.6; margin-bottom: 20px; }
     .dep-author { display: flex; align-items: center; gap: 10px; }
-    .dep-av {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: var(--purple-pale); color: var(--purple);
-      display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0;
-    }
-    .dep-name strong { font-size: .83rem; font-weight: 600; display: block; }
-    .dep-name span { font-size: .72rem; color: var(--ink-muted); }
+    .dep-av { width: 32px; height: 32px; border-radius: 50%; background: var(--p-bg); color: var(--p); display: flex; align-items: center; justify-content: center; font-size: .8rem; flex-shrink: 0; }
+    .dep-nm strong { font-size: .8rem; font-weight: 600; display: block; }
+    .dep-nm span { font-size: .7rem; color: var(--muted); }
 
-    /* ════════════════════════════════════════
-       CONTATO
-    ════════════════════════════════════════ */
-    #contato { padding: 80px 0; background: var(--white); }
-    @media (min-width: 768px) { #contato { padding: 110px 0; } }
+    /* ════════════ CONTATO ════════════ */
+    .contato-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    @media (min-width: 768px) { .contato-grid { grid-template-columns: 1fr 1.3fr; gap: 60px; align-items: start; } }
 
-    .contato-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
-    @media (min-width: 768px) { .contato-grid { grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; } }
+    .c-hdr h2 { margin-bottom: 12px; }
+    .c-hdr .sub { margin-bottom: 28px; }
 
-    .contato-text .eyebrow { margin-bottom: 14px; }
-    .contato-text h2 { margin-bottom: 14px; }
-    .contato-text .lead { margin-bottom: 32px; }
-
-    .c-list { display: flex; flex-direction: column; gap: 10px; }
+    .c-list { display: flex; flex-direction: column; gap: 8px; }
     .c-row {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 16px 18px; border-radius: var(--r);
-      border: 1px solid var(--border-lt); transition: var(--t);
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; border-radius: var(--r);
+      border: 1px solid var(--line); transition: var(--t);
     }
-    .c-row:hover { border-color: var(--border); }
-    .c-ico {
-      width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .9rem; color: var(--white);
-    }
-    .c-ico.p { background: var(--purple); }
-    .c-ico.g { background: #25C26E; }
-    .c-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--purple); display: block; margin-bottom: 2px; }
-    .c-val { font-size: .9rem; color: var(--ink); }
+    .c-row:hover { border-color: var(--p-bdr); background: var(--p-bg); }
+    .c-ico { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: .85rem; color: var(--white); }
+    .ci-p { background: var(--p); }
+    .ci-g { background: #22C55E; }
+    .c-lbl { font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--p); display: block; margin-bottom: 1px; }
+    .c-val { font-size: .85rem; color: var(--ink); }
 
-    .map-box {
-      border-radius: var(--r-lg); overflow: hidden;
-      border: 1px solid var(--border-lt); height: 420px;
-    }
-    @media (min-width: 768px) { .map-box { height: 480px; } }
+    .map-box { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); height: 380px; }
+    @media (min-width: 768px) { .map-box { height: 440px; } }
     .map-box iframe { width: 100%; height: 100%; border: none; display: block; }
 
-    /* ════════════════════════════════════════
-       FOOTER
-    ════════════════════════════════════════ */
-    #footer { background: var(--dark-bg); padding: 60px 0 28px; }
+    /* ════════════ FOOTER ════════════ */
+    #footer { background: var(--ink); padding: 56px 0 24px; }
 
-    .footer-grid {
-      display: grid; grid-template-columns: 1fr;
-      gap: 40px; padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 24px;
-    }
-    @media (min-width: 640px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; } }
+    .ft-grid { display: grid; grid-template-columns: 1fr; gap: 36px; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 20px; }
+    @media (min-width: 640px) { .ft-grid { grid-template-columns: 1.3fr 1fr 1fr; gap: 48px; } }
 
-    .ft-brand img { height: 48px; width: auto; margin-bottom: 14px; filter: brightness(10) saturate(0); opacity: .55; }
-    .ft-brand p { font-size: .82rem; color: rgba(255,255,255,.38); line-height: 1.7; max-width: 280px; }
+    .ft-logo img { height: 42px; width: auto; margin-bottom: 12px; filter: brightness(10) saturate(0); opacity: .45; }
+    .ft-logo p { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.7; max-width: 260px; }
 
-    .ft-socials { display: flex; gap: 8px; margin-top: 20px; }
-    .ft-soc {
-      width: 34px; height: 34px; border-radius: 8px;
-      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,.5); font-size: .85rem; transition: var(--t);
-    }
-    .ft-soc:hover { background: var(--purple); border-color: var(--purple); color: var(--white); }
+    .ft-socials { display: flex; gap: 8px; margin-top: 18px; }
+    .ft-soc { width: 30px; height: 30px; border-radius: 6px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.4); font-size: .8rem; transition: var(--t); }
+    .ft-soc:hover { background: var(--p); border-color: var(--p); color: var(--white); }
 
-    .ft-col h5 { font-family: var(--serif); color: var(--white); font-size: .95rem; margin-bottom: 16px; font-weight: 400; }
-    .ft-links { display: flex; flex-direction: column; gap: 9px; }
-    .ft-links a { font-size: .8rem; color: rgba(255,255,255,.38); transition: color .2s; }
-    .ft-links a:hover { color: rgba(255,255,255,.75); }
+    .ft-col h5 { font-family: var(--serif); color: rgba(255,255,255,.7); font-size: .88rem; font-weight: 400; margin-bottom: 14px; }
+    .ft-links { display: flex; flex-direction: column; gap: 8px; }
+    .ft-links a { font-size: .76rem; color: rgba(255,255,255,.32); transition: color .2s; }
+    .ft-links a:hover { color: rgba(255,255,255,.65); }
+    .ft-info { font-size: .76rem; color: rgba(255,255,255,.32); display: flex; gap: 8px; margin-bottom: 9px; }
+    .ft-info i { color: var(--p); opacity: .7; margin-top: 2px; flex-shrink: 0; width: 12px; font-size: .7rem; }
 
-    .ft-item { display: flex; gap: 9px; margin-bottom: 10px; font-size: .8rem; color: rgba(255,255,255,.38); }
-    .ft-item i { color: var(--gold-lt); margin-top: 2px; flex-shrink: 0; width: 12px; font-size: .75rem; }
+    .ft-bot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: .68rem; color: rgba(255,255,255,.2); }
 
-    .footer-bot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: .72rem; color: rgba(255,255,255,.22); }
-
-    /* ════════════════════════════════════════
-       FLOATING WPP
-    ════════════════════════════════════════ */
-    .wpp-float {
+    /* ════════════ FLOAT WPP ════════════ */
+    .wpp {
       position: fixed; bottom: 20px; right: 20px; z-index: 800;
-      background: #25C26E; color: var(--white);
-      border-radius: 50px; padding: 13px 20px;
-      display: flex; align-items: center; gap: 8px;
-      font-size: .82rem; font-weight: 600;
-      box-shadow: 0 6px 24px rgba(37,194,110,.35);
+      background: #22C55E; color: var(--white); border-radius: 50px;
+      padding: 12px 18px; display: flex; align-items: center; gap: 7px;
+      font-size: .8rem; font-weight: 600;
+      box-shadow: 0 4px 20px rgba(34,197,94,.3);
       transition: all var(--t);
-      animation: wpp-pulse 3s ease-in-out infinite;
     }
-    .wpp-float i { font-size: 1.2rem; }
-    .wpp-float span { display: none; }
-    @media (min-width: 640px) { .wpp-float span { display: inline; } .wpp-float { padding: 13px 22px; } }
-    .wpp-float:hover { background: #1EA85D; transform: translateY(-2px); animation: none; box-shadow: 0 10px 32px rgba(37,194,110,.4); }
-
-    @keyframes wpp-pulse {
-      0%, 100% { box-shadow: 0 6px 24px rgba(37,194,110,.35); }
-      50%       { box-shadow: 0 6px 36px rgba(37,194,110,.55); }
-    }
+    .wpp i { font-size: 1.1rem; }
+    .wpp span { display: none; }
+    @media (min-width: 560px) { .wpp span { display: inline; } }
+    .wpp:hover { background: #16A34A; transform: translateY(-2px); }
   </style>
 </head>
-
 <body>
 
-<!-- ── HEADER ───────────────────────────────────────── -->
+<!-- HEADER -->
 <header id="hdr">
   <div class="wrap hdr-inner">
     <a href="#" class="hdr-logo">
       <img src="https://residencialbemquerer.com.br/wp-content/uploads/2021/02/asasasasas.png" alt="Residencial Bem Querer" />
     </a>
-
     <nav class="hdr-nav">
       <a href="#sobre">Sobre</a>
       <a href="#servicos">Serviços</a>
@@ -727,19 +431,17 @@
       <a href="#galeria">Estrutura</a>
       <a href="#contato">Contato</a>
     </nav>
-
-    <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Residencial%20Bem%20Querer." class="hdr-wpp" target="_blank">
+    <a href="https://wa.me/5562983410308" class="hdr-wpp" target="_blank">
       <i class="fab fa-whatsapp"></i> WhatsApp
     </a>
-
     <button class="hdr-burger" id="burger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- Mobile menu -->
-<div class="mob-menu" id="mobMenu">
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
   <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
   <a href="#sobre"    onclick="closeMob()">Sobre</a>
   <a href="#servicos" onclick="closeMob()">Serviços</a>
@@ -747,409 +449,304 @@
   <a href="#galeria"  onclick="closeMob()">Estrutura</a>
   <a href="#contato"  onclick="closeMob()">Contato</a>
   <a href="https://wa.me/5562983410308" class="mob-wpp" target="_blank">
-    <i class="fab fa-whatsapp"></i> Falar pelo WhatsApp
+    <i class="fab fa-whatsapp"></i> WhatsApp
   </a>
 </div>
 
-<!-- ── HERO ─────────────────────────────────────────── -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-
-  <div class="wrap hero-body">
-    <div class="hero-text">
-      <div class="eyebrow">
-        <span style="width:20px;height:1.5px;background:var(--gold-lt);display:block;"></span>
-        Residencial para a Melhor Idade — Anápolis, GO
-      </div>
-
-      <h1 class="hero-h1">
-        Cuidado e carinho<br/>
-        <em>para quem você ama</em>
-      </h1>
-
-      <p class="hero-sub">
-        Um ambiente seguro, acolhedor e profissional onde cada idoso recebe atenção especializada — e cada família vive com tranquilidade.
-      </p>
-
-      <div class="hero-actions">
-        <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita." class="btn btn-wpp" target="_blank">
-          <i class="fab fa-whatsapp"></i> Agendar uma visita
-        </a>
-        <a href="#sobre" class="btn btn-ghost-light">Saiba mais</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="h-stat" style="padding-left:0">
-          <span class="h-stat-n">7+</span>
-          <span class="h-stat-l">Anos de cuidado</span>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">Residencial para a Melhor Idade</div>
+        <h1 class="hero-h1">
+          Cuidado e carinho<br/>
+          <em>para quem você ama</em>
+        </h1>
+        <p class="hero-sub">Um espaço acolhedor, seguro e profissional onde cada idoso recebe atenção especializada — e cada família vive com tranquilidade.</p>
+        <div class="hero-btns">
+          <a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20agendar%20uma%20visita." class="btn btn-wpp" target="_blank">
+            <i class="fab fa-whatsapp"></i> Agendar visita
+          </a>
+          <a href="#sobre" class="btn btn-ol">Saiba mais</a>
         </div>
-        <div class="h-stat" style="padding-left:24px">
-          <span class="h-stat-n">7</span>
-          <span class="h-stat-l">Especialidades</span>
-        </div>
-        <div class="h-stat" style="padding-left:24px;border-right:none">
-          <span class="h-stat-n">24h</span>
-          <span class="h-stat-l">Atendimento</span>
+        <div class="hero-stats">
+          <div><span class="hs-n">7+</span><span class="hs-l">Anos</span></div>
+          <div><span class="hs-n">7</span><span class="hs-l">Especialidades</span></div>
+          <div><span class="hs-n">24h</span><span class="hs-l">Atendimento</span></div>
         </div>
       </div>
-    </div>
-
-    <div class="hero-img-col">
-      <div class="hero-img-frame">
+      <div class="hero-img up d2">
         <i class="fas fa-camera"></i>
-        <span>Foto da fachada</span>
-        <div class="hero-card">
-          <div class="hc-icon"><i class="fas fa-heart-pulse"></i></div>
-          <div>
-            <span class="hc-n">24h</span>
-            <span class="hc-l">Cuidado contínuo</span>
-          </div>
-        </div>
+        <span>Foto principal</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── TRUST STRIP ──────────────────────────────────── -->
+<!-- TRUST -->
 <section id="trust">
   <div class="wrap">
-    <div class="trust-grid">
+    <div class="trust-row">
       <div class="trust-item up">
-        <div class="ti-icon"><i class="fas fa-user-doctor"></i></div>
-        <div class="ti-text"><strong>Equipe médica</strong><span>Acompanhamento especializado</span></div>
+        <div class="ti-ico"><i class="fas fa-user-doctor"></i></div>
+        <div class="ti-t"><strong>Equipe médica</strong><span>Acompanhamento completo</span></div>
       </div>
       <div class="trust-item up d1">
-        <div class="ti-icon"><i class="fas fa-shield-heart"></i></div>
-        <div class="ti-text"><strong>Ambiente seguro</strong><span>Estrutura adaptada</span></div>
+        <div class="ti-ico"><i class="fas fa-shield-heart"></i></div>
+        <div class="ti-t"><strong>Ambiente seguro</strong><span>Estrutura adaptada</span></div>
       </div>
       <div class="trust-item up d2">
-        <div class="ti-icon"><i class="fas fa-comments"></i></div>
-        <div class="ti-text"><strong>Família informada</strong><span>Comunicação constante</span></div>
+        <div class="ti-ico"><i class="fas fa-comments"></i></div>
+        <div class="ti-t"><strong>Família informada</strong><span>Comunicação contínua</span></div>
       </div>
-      <div class="trust-item up d3" style="border-right:1px solid var(--border-lt)">
-        <div class="ti-icon"><i class="fas fa-clock"></i></div>
-        <div class="ti-text"><strong>Atendimento 24h</strong><span>Suporte ininterrupto</span></div>
+      <div class="trust-item up d3" style="border-right:1px solid var(--line)">
+        <div class="ti-ico"><i class="fas fa-clock"></i></div>
+        <div class="ti-t"><strong>Atendimento 24h</strong><span>Suporte ininterrupto</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── SOBRE ─────────────────────────────────────────── -->
-<section id="sobre">
+<!-- SOBRE -->
+<section id="sobre" class="sec">
   <div class="wrap">
     <div class="sobre-grid">
-
-      <div class="sobre-img up">
-        <div class="sobre-ph ph">
+      <div class="up">
+        <div class="sobre-img-box">
           <i class="fas fa-camera"></i>
           <span>Foto da estrutura</span>
         </div>
-        <div class="sobre-img-accent"></div>
-        <div class="sobre-quote">
-          <p>Um lar feito de afeto e cuidado profissional.</p>
-        </div>
       </div>
-
       <div class="sobre-text up d2">
         <div class="eyebrow">Sobre Nós</div>
-        <h2>Um lar construído com <em>propósito</em></h2>
-        <p class="lead" style="margin-top:18px;">O Residencial Bem Querer nasceu com um único propósito: oferecer aos idosos um espaço onde se sintam verdadeiramente em casa — com segurança, conforto e atenção que merecem.</p>
-        <p class="lead" style="margin-top:14px;">Nossa equipe multidisciplinar trabalha de forma integrada para garantir bem-estar físico, emocional e social de cada residente, mantendo a família informada em cada etapa.</p>
-        <div class="sobre-pills">
-          <span class="pill"><i class="fas fa-calendar-heart"></i> Desde 2019</span>
-          <span class="pill"><i class="fas fa-user-doctor"></i> Equipe completa</span>
-          <span class="pill"><i class="fas fa-house-heart"></i> Ambiente familiar</span>
+        <h2>Um lar com <em>propósito e afeto</em></h2>
+        <p class="sub" style="margin-top:16px;">O Residencial Bem Querer nasceu com um único propósito: oferecer aos idosos um espaço onde se sintam verdadeiramente em casa — com segurança, conforto e atenção que merecem.</p>
+        <p class="sub" style="margin-top:12px;">Nossa equipe multidisciplinar trabalha de forma integrada para garantir bem-estar físico, emocional e social, mantendo sua família informada em cada etapa.</p>
+        <div class="pills">
+          <span class="pill"><i class="fas fa-calendar-check" style="font-size:.65rem"></i> Desde 2019</span>
+          <span class="pill"><i class="fas fa-user-doctor" style="font-size:.65rem"></i> Equipe completa</span>
+          <span class="pill"><i class="fas fa-house-heart" style="font-size:.65rem"></i> Ambiente familiar</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ── MODALIDADES ──────────────────────────────────── -->
-<section id="servicos">
+<!-- SERVIÇOS -->
+<section id="servicos" class="sec sec-alt">
   <div class="wrap">
     <div class="sec-hdr up">
-      <div class="eyebrow">Modalidades de Atendimento</div>
-      <h2 style="margin-top:14px;">Como podemos <em>ajudar sua família</em></h2>
+      <div class="eyebrow">Modalidades</div>
+      <h2 style="margin-top:10px;">Como podemos <em>ajudar</em></h2>
     </div>
-
     <div class="svc-list">
       <div class="svc-row up d1">
-        <div class="svc-num">01</div>
-        <div class="svc-info">
+        <div class="svc-n">01</div>
+        <div>
           <h3>Residência Permanente</h3>
-          <p>Para quem precisa de um novo lar. Oferecemos acomodação completa, cuidados diários, refeições balanceadas, atividades e acompanhamento médico contínuo em ambiente seguro e acolhedor.</p>
+          <p>Acomodação completa, cuidados diários, refeições, atividades e acompanhamento médico contínuo em ambiente seguro e acolhedor.</p>
         </div>
-        <div class="svc-tag"><i class="fas fa-home"></i> Longa permanência</div>
+        <div class="svc-tag">Longa permanência</div>
       </div>
       <div class="svc-row up d2">
-        <div class="svc-num">02</div>
-        <div class="svc-info">
+        <div class="svc-n">02</div>
+        <div>
           <h3>Estadias Temporárias</h3>
-          <p>Ideal para férias, feriados ou recuperação pós-operatória. Sua família descansa com a certeza de que seu ente querido está sendo bem cuidado por profissionais qualificados.</p>
+          <p>Para férias, feriados ou recuperação pós-operatória. Sua família descansa com a certeza de que seu ente querido está bem cuidado.</p>
         </div>
-        <div class="svc-tag"><i class="fas fa-calendar-check"></i> Curta e média permanência</div>
+        <div class="svc-tag">Curta e média permanência</div>
       </div>
       <div class="svc-row up d3">
-        <div class="svc-num">03</div>
-        <div class="svc-info">
+        <div class="svc-n">03</div>
+        <div>
           <h3>Permanência Diária</h3>
-          <p>O idoso passa o dia com nossa equipe — atividades, cuidados, companhia — e retorna para casa à noite. Solução prática para famílias que trabalham durante o dia.</p>
+          <p>O idoso passa o dia com nossa equipe — atividades, cuidados, companhia — e retorna para casa à noite. Ideal para famílias que trabalham.</p>
         </div>
-        <div class="svc-tag"><i class="fas fa-sun"></i> Retorno noturno</div>
+        <div class="svc-tag">Retorno noturno</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── EQUIPE ─────────────────────────────────────────── -->
-<section id="equipe">
+<!-- EQUIPE -->
+<section id="equipe" class="sec">
   <div class="wrap">
-    <div class="equipe-intro up">
-      <div>
-        <div class="eyebrow">Nossa Equipe</div>
-        <h2 style="margin-top:14px;">Profissionais <em>dedicados</em></h2>
-      </div>
-      <p class="lead">Uma equipe multidisciplinar completa trabalhando de forma integrada pelo bem-estar de cada residente.</p>
+    <div class="sec-hdr up">
+      <div class="eyebrow">Nossa Equipe</div>
+      <h2 style="margin-top:10px;">Profissionais <em>dedicados ao seu cuidado</em></h2>
     </div>
 
-    <div class="cat-block up d1">
-      <div class="cat-label">Saúde Médica</div>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="tc-icon med"><i class="fas fa-user-doctor"></i></div>
-          <div><div class="tc-name">Médico</div><div class="tc-role">Acompanhamento clínico</div></div>
-        </div>
-        <div class="team-card">
-          <div class="tc-icon med"><i class="fas fa-syringe"></i></div>
-          <div><div class="tc-name">Técnico de Enfermagem</div><div class="tc-role">Cuidados de saúde</div></div>
-        </div>
-        <div class="team-card">
-          <div class="tc-icon med"><i class="fas fa-hands-holding-heart"></i></div>
-          <div><div class="tc-name">Cuidador</div><div class="tc-role">Assistência diária</div></div>
-        </div>
-      </div>
+    <div class="cat-hdr up d1">Saúde Médica</div>
+    <div class="team-grid up d1">
+      <div class="tc"><div class="tc-ico"><i class="fas fa-user-doctor"></i></div><div><div class="tc-n">Médico</div><div class="tc-r">Acompanhamento clínico</div></div></div>
+      <div class="tc"><div class="tc-ico"><i class="fas fa-syringe"></i></div><div><div class="tc-n">Técnico de Enfermagem</div><div class="tc-r">Cuidados de saúde</div></div></div>
+      <div class="tc"><div class="tc-ico"><i class="fas fa-hands-holding-heart"></i></div><div><div class="tc-n">Cuidador</div><div class="tc-r">Assistência diária</div></div></div>
     </div>
 
-    <div class="cat-block up d2">
-      <div class="cat-label">Terapias e Reabilitação</div>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="tc-icon ther"><i class="fas fa-person-walking-with-cane"></i></div>
-          <div><div class="tc-name">Fisioterapeuta</div><div class="tc-role">Reabilitação e mobilidade</div></div>
-        </div>
-        <div class="team-card">
-          <div class="tc-icon ther"><i class="fas fa-puzzle-piece"></i></div>
-          <div><div class="tc-name">Terapeuta Ocupacional</div><div class="tc-role">Autonomia e qualidade de vida</div></div>
-        </div>
-        <div class="team-card">
-          <div class="tc-icon ther"><i class="fas fa-music"></i></div>
-          <div><div class="tc-name">Musicoterapeuta</div><div class="tc-role">Bem-estar emocional</div></div>
-        </div>
-      </div>
+    <div class="cat-hdr up d2">Terapias e Reabilitação</div>
+    <div class="team-grid up d2">
+      <div class="tc"><div class="tc-ico"><i class="fas fa-person-walking-with-cane"></i></div><div><div class="tc-n">Fisioterapeuta</div><div class="tc-r">Reabilitação e mobilidade</div></div></div>
+      <div class="tc"><div class="tc-ico"><i class="fas fa-puzzle-piece"></i></div><div><div class="tc-n">Terapeuta Ocupacional</div><div class="tc-r">Autonomia e qualidade de vida</div></div></div>
+      <div class="tc"><div class="tc-ico"><i class="fas fa-music"></i></div><div><div class="tc-n">Musicoterapeuta</div><div class="tc-r">Bem-estar emocional</div></div></div>
     </div>
 
-    <div class="cat-block up d3">
-      <div class="cat-label">Nutrição e Bem-Estar</div>
-      <div class="team-grid col2">
-        <div class="team-card">
-          <div class="tc-icon well"><i class="fas fa-apple-whole"></i></div>
-          <div><div class="tc-name">Nutricionista</div><div class="tc-role">Alimentação personalizada</div></div>
-        </div>
-      </div>
+    <div class="cat-hdr up d3">Nutrição e Bem-Estar</div>
+    <div class="team-grid g2 up d3">
+      <div class="tc"><div class="tc-ico"><i class="fas fa-apple-whole"></i></div><div><div class="tc-n">Nutricionista</div><div class="tc-r">Alimentação personalizada</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── DIFERENCIAIS (dark) ──────────────────────────── -->
-<section id="dif">
+<!-- DIFERENCIAIS -->
+<section id="dif" class="sec sec-alt">
   <div class="wrap">
-    <div class="dif-top up">
-      <div>
-        <div class="eyebrow">Por que o Bem Querer?</div>
-        <h2 style="margin-top:14px;">O que nos torna <em>diferentes</em></h2>
-      </div>
-      <p class="lead">Cada detalhe do Residencial Bem Querer foi pensado para proporcionar o melhor cuidado e a maior tranquilidade para sua família.</p>
+    <div class="sec-hdr up">
+      <div class="eyebrow">Por que o Bem Querer?</div>
+      <h2 style="margin-top:10px;">O que nos torna <em>diferentes</em></h2>
     </div>
-
     <div class="dif-grid">
-      <div class="dif-item up d1">
-        <div class="dif-icon"><i class="fas fa-clock"></i></div>
-        <h4>Cuidado 24 Horas</h4>
-        <p>Equipe presente em todos os momentos, garantindo segurança e assistência ininterruptas.</p>
-      </div>
-      <div class="dif-item up d2">
-        <div class="dif-icon"><i class="fas fa-shield-heart"></i></div>
-        <h4>Ambiente Seguro</h4>
-        <p>Estrutura totalmente adaptada, com acessibilidade e segurança em cada espaço.</p>
-      </div>
-      <div class="dif-item up d3">
-        <div class="dif-icon"><i class="fas fa-stethoscope"></i></div>
-        <h4>Equipe Especializada</h4>
-        <p>Profissionais qualificados cuidando da saúde física e emocional de cada residente.</p>
-      </div>
-      <div class="dif-item up d4">
-        <div class="dif-icon"><i class="fas fa-utensils"></i></div>
-        <h4>Nutrição Individualizada</h4>
-        <p>Cardápio elaborado por nutricionista, adaptado às necessidades de cada pessoa.</p>
-      </div>
-      <div class="dif-item up d5">
-        <div class="dif-icon"><i class="fas fa-person-running"></i></div>
-        <h4>Atividades Terapêuticas</h4>
-        <p>Programação diária para manter corpo e mente ativos, saudáveis e estimulados.</p>
-      </div>
-      <div class="dif-item up d6">
-        <div class="dif-icon"><i class="fas fa-comments"></i></div>
-        <h4>Família Informada</h4>
-        <p>Comunicação transparente e constante com relatórios e total abertura para visitas.</p>
-      </div>
+      <div class="dif-item up d1"><div class="dif-ico"><i class="fas fa-clock"></i></div><h4>Cuidado 24 Horas</h4><p>Equipe presente em todos os momentos, com suporte ininterrupto.</p></div>
+      <div class="dif-item up d2"><div class="dif-ico"><i class="fas fa-shield-heart"></i></div><h4>Ambiente Seguro</h4><p>Estrutura adaptada, com acessibilidade e segurança em cada espaço.</p></div>
+      <div class="dif-item up d3"><div class="dif-ico"><i class="fas fa-stethoscope"></i></div><h4>Equipe Especializada</h4><p>Profissionais qualificados cuidando da saúde física e emocional.</p></div>
+      <div class="dif-item up d4"><div class="dif-ico"><i class="fas fa-utensils"></i></div><h4>Nutrição Individualizada</h4><p>Cardápio elaborado por nutricionista, adaptado a cada pessoa.</p></div>
+      <div class="dif-item up d5"><div class="dif-ico"><i class="fas fa-person-running"></i></div><h4>Atividades Terapêuticas</h4><p>Programação diária para manter corpo e mente ativos e saudáveis.</p></div>
+      <div class="dif-item up d6"><div class="dif-ico"><i class="fas fa-comments"></i></div><h4>Família Informada</h4><p>Comunicação transparente, relatórios e abertura total para visitas.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── GALERIA ──────────────────────────────────────── -->
-<section id="galeria">
+<!-- GALERIA -->
+<section id="galeria" class="sec">
   <div class="wrap">
-    <div class="gal-top up">
+    <div class="sec-hdr up">
       <div class="eyebrow">Nossa Estrutura</div>
-      <h2 style="margin-top:14px;">Um ambiente pensado <em>para você</em></h2>
+      <h2 style="margin-top:10px;">Um ambiente pensado <em>para você</em></h2>
     </div>
     <div class="gal-grid">
-      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Área principal</span></div></div>
-      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Quartos</span></div></div>
-      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Área de lazer</span></div></div>
-      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Refeitório</span></div></div>
-      <div class="gal-item"><div class="gal-ph"><i class="fas fa-camera"></i><span>Jardim</span></div></div>
+      <div class="gi"><div class="gi-ph"><i class="fas fa-camera"></i><span>Área principal</span></div></div>
+      <div class="gi"><div class="gi-ph"><i class="fas fa-camera"></i><span>Quartos</span></div></div>
+      <div class="gi"><div class="gi-ph"><i class="fas fa-camera"></i><span>Área de lazer</span></div></div>
+      <div class="gi"><div class="gi-ph"><i class="fas fa-camera"></i><span>Refeitório</span></div></div>
+      <div class="gi"><div class="gi-ph"><i class="fas fa-camera"></i><span>Jardim</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── CTA BAND ─────────────────────────────────────── -->
+<!-- CTA -->
 <section id="cta">
-  <div class="wrap cta-inner">
-    <div class="eyebrow">Dê o primeiro passo</div>
-    <h2>Agende uma visita e<br/><em>conheça pessoalmente</em></h2>
-    <p>Venha conhecer nossa estrutura, nossa equipe e o ambiente que pode se tornar o lar do seu familiar.</p>
-    <div class="cta-actions">
-      <a href="https://wa.me/5562983410308?text=Gostaria%20de%20agendar%20uma%20visita%20ao%20Residencial%20Bem%20Querer." class="btn btn-wpp" target="_blank">
+  <div class="wrap">
+    <div class="cta-eyebrow">Dê o primeiro passo</div>
+    <h2>Agende uma visita e <em>conheça pessoalmente</em></h2>
+    <p>Venha ver nossa estrutura, conhecer a equipe e descobrir por que somos a escolha certa para o seu familiar.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5562983410308?text=Gostaria%20de%20agendar%20uma%20visita." class="btn btn-wpp" target="_blank">
         <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
       </a>
-      <a href="tel:6237029764" class="btn btn-ghost-light">
+      <a href="tel:6237029764" class="btn btn-wpp-ol">
         <i class="fas fa-phone"></i> (62) 3702-9764
       </a>
     </div>
   </div>
 </section>
 
-<!-- ── DEPOIMENTOS ──────────────────────────────────── -->
-<section id="dep">
+<!-- DEPOIMENTOS -->
+<section id="dep" class="sec sec-alt">
   <div class="wrap">
-    <div class="dep-hdr up">
+    <div class="sec-hdr up">
       <div class="eyebrow">Depoimentos</div>
-      <h2 style="margin-top:14px;">O que as <em>famílias</em> dizem</h2>
+      <h2 style="margin-top:10px;">O que as <em>famílias</em> dizem</h2>
     </div>
     <div class="dep-grid">
       <div class="dep-card up d1">
         <div class="dep-stars">★★★★★</div>
-        <span class="dep-quote-mark">"</span>
-        <p>A equipe cuida da minha mãe com uma atenção que raramente encontramos. Sinto paz sabendo que ela está bem assistida e feliz.</p>
-        <div class="dep-author">
-          <div class="dep-av"><i class="fas fa-user"></i></div>
-          <div class="dep-name"><strong>Família Silva</strong><span>Residente permanente</span></div>
-        </div>
+        <span class="dep-q">"</span>
+        <p>A equipe cuida da minha mãe com atenção que raramente encontramos. Sinto paz sabendo que ela está bem assistida e feliz.</p>
+        <div class="dep-author"><div class="dep-av"><i class="fas fa-user"></i></div><div class="dep-nm"><strong>Família Silva</strong><span>Residente permanente</span></div></div>
       </div>
       <div class="dep-card up d2">
         <div class="dep-stars">★★★★★</div>
-        <span class="dep-quote-mark">"</span>
-        <p>Deixamos nosso pai durante as férias e voltamos tranquilos. A estrutura é excelente e a comunicação com a família é muito boa.</p>
-        <div class="dep-author">
-          <div class="dep-av"><i class="fas fa-user"></i></div>
-          <div class="dep-name"><strong>Família Oliveira</strong><span>Estadia temporária</span></div>
-        </div>
+        <span class="dep-q">"</span>
+        <p>Deixamos nosso pai durante as férias e voltamos tranquilos. Estrutura excelente e comunicação muito boa com a família.</p>
+        <div class="dep-author"><div class="dep-av"><i class="fas fa-user"></i></div><div class="dep-nm"><strong>Família Oliveira</strong><span>Estadia temporária</span></div></div>
       </div>
       <div class="dep-card up d3">
         <div class="dep-stars">★★★★★</div>
-        <span class="dep-quote-mark">"</span>
-        <p>Minha avó faz a permanência diária e chega em casa sorrindo. As atividades fazem toda a diferença. Recomendo muito o Bem Querer.</p>
-        <div class="dep-author">
-          <div class="dep-av"><i class="fas fa-user"></i></div>
-          <div class="dep-name"><strong>Família Costa</strong><span>Permanência diária</span></div>
-        </div>
+        <span class="dep-q">"</span>
+        <p>Minha avó faz permanência diária e chega em casa sorrindo. As atividades fazem toda a diferença. Recomendo muito.</p>
+        <div class="dep-author"><div class="dep-av"><i class="fas fa-user"></i></div><div class="dep-nm"><strong>Família Costa</strong><span>Permanência diária</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTATO ──────────────────────────────────────── -->
-<section id="contato">
+<!-- CONTATO -->
+<section id="contato" class="sec">
   <div class="wrap">
     <div class="contato-grid">
-      <div class="contato-text up">
-        <div class="eyebrow">Fale Conosco</div>
-        <h2>Venha nos <em>conhecer</em></h2>
-        <p class="lead" style="margin-top:14px;">Estamos prontos para receber você e sua família. Entre em contato e agende uma visita sem compromisso.</p>
-        <div class="c-list" style="margin-top:28px;">
+      <div class="c-hdr up">
+        <div class="eyebrow">Contato</div>
+        <h2 style="margin-top:10px;">Venha nos <em>conhecer</em></h2>
+        <p class="sub" style="margin-top:12px;margin-bottom:28px;">Estamos prontos para receber você e sua família. Entre em contato e agende uma visita sem compromisso.</p>
+        <div class="c-list">
           <div class="c-row">
-            <div class="c-ico p"><i class="fas fa-map-marker-alt"></i></div>
-            <div><span class="c-label">Endereço</span><span class="c-val">Rua Hugo de Carvalho Ramos, 300 — Jundiaí, Anápolis-GO</span></div>
+            <div class="c-ico ci-p"><i class="fas fa-map-marker-alt"></i></div>
+            <div><span class="c-lbl">Endereço</span><span class="c-val">Rua Hugo de Carvalho Ramos, 300 — Jundiaí, Anápolis-GO</span></div>
           </div>
-          <a href="tel:6237029764" class="c-row" style="cursor:pointer">
-            <div class="c-ico p"><i class="fas fa-phone"></i></div>
-            <div><span class="c-label">Telefone</span><span class="c-val">(62) 3702-9764</span></div>
+          <a href="tel:6237029764" class="c-row">
+            <div class="c-ico ci-p"><i class="fas fa-phone"></i></div>
+            <div><span class="c-lbl">Telefone</span><span class="c-val">(62) 3702-9764</span></div>
           </a>
-          <a href="https://wa.me/5562983410308" class="c-row" style="cursor:pointer" target="_blank">
-            <div class="c-ico g"><i class="fab fa-whatsapp"></i></div>
-            <div><span class="c-label">WhatsApp</span><span class="c-val">(62) 9 8341-0308 — Clique para conversar</span></div>
+          <a href="https://wa.me/5562983410308" class="c-row" target="_blank">
+            <div class="c-ico ci-g"><i class="fab fa-whatsapp"></i></div>
+            <div><span class="c-lbl">WhatsApp</span><span class="c-val">(62) 9 8341-0308</span></div>
           </a>
-          <a href="mailto:bemquereranapolis@gmail.com" class="c-row" style="cursor:pointer">
-            <div class="c-ico p"><i class="fas fa-envelope"></i></div>
-            <div><span class="c-label">E-mail</span><span class="c-val">bemquereranapolis@gmail.com</span></div>
+          <a href="mailto:bemquereranapolis@gmail.com" class="c-row">
+            <div class="c-ico ci-p"><i class="fas fa-envelope"></i></div>
+            <div><span class="c-lbl">E-mail</span><span class="c-val">bemquereranapolis@gmail.com</span></div>
           </a>
         </div>
       </div>
       <div class="map-box up d2">
         <iframe src="https://maps.google.com/maps?q=Rua+Hugo+de+Carvalho+Ramos,+300,+Jundiai,+Anapolis,+GO&output=embed"
-          allowfullscreen loading="lazy" title="Localização Residencial Bem Querer"></iframe>
+          allowfullscreen loading="lazy" title="Localização"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ───────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer id="footer">
   <div class="wrap">
-    <div class="footer-grid">
-      <div class="ft-brand">
+    <div class="ft-grid">
+      <div class="ft-logo">
         <img src="https://residencialbemquerer.com.br/wp-content/uploads/2021/02/asasasasas.png" alt="Residencial Bem Querer" />
-        <p>Cuidado especializado e ambiente acolhedor. Porque cada idoso merece viver com dignidade, carinho e alegria.</p>
+        <p>Cuidado especializado e ambiente acolhedor para a melhor idade.</p>
         <div class="ft-socials">
           <a href="#" class="ft-soc"><i class="fab fa-instagram"></i></a>
           <a href="#" class="ft-soc"><i class="fab fa-facebook-f"></i></a>
           <a href="https://wa.me/5562983410308" class="ft-soc" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
-      <div class="ft-col">
+      <div>
         <h5>Navegação</h5>
         <ul class="ft-links">
           <li><a href="#sobre">Sobre Nós</a></li>
           <li><a href="#servicos">Modalidades</a></li>
-          <li><a href="#equipe">Nossa Equipe</a></li>
+          <li><a href="#equipe">Equipe</a></li>
           <li><a href="#galeria">Estrutura</a></li>
-          <li><a href="#dep">Depoimentos</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </div>
-      <div class="ft-col">
+      <div>
         <h5>Contato</h5>
-        <div class="ft-item"><i class="fas fa-map-marker-alt"></i><span>Rua Hugo de Carvalho Ramos, 300 — Anápolis-GO</span></div>
-        <div class="ft-item"><i class="fas fa-phone"></i><span>(62) 3702-9764</span></div>
-        <div class="ft-item"><i class="fab fa-whatsapp"></i><span>(62) 9 8341-0308</span></div>
-        <div class="ft-item"><i class="fas fa-envelope"></i><span>bemquereranapolis@gmail.com</span></div>
+        <div class="ft-info"><i class="fas fa-map-marker-alt"></i><span>Rua Hugo de Carvalho Ramos, 300 — Anápolis-GO</span></div>
+        <div class="ft-info"><i class="fas fa-phone"></i><span>(62) 3702-9764</span></div>
+        <div class="ft-info"><i class="fab fa-whatsapp"></i><span>(62) 9 8341-0308</span></div>
+        <div class="ft-info"><i class="fas fa-envelope"></i><span>bemquereranapolis@gmail.com</span></div>
       </div>
     </div>
-    <div class="footer-bot">
+    <div class="ft-bot">
       <span>© 2024 Residencial Bem Querer. Todos os direitos reservados.</span>
       <span>Anápolis — GO</span>
     </div>
@@ -1157,39 +754,28 @@
 </footer>
 
 <!-- WhatsApp float -->
-<a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Residencial%20Bem%20Querer."
-   class="wpp-float" target="_blank" aria-label="WhatsApp">
+<a href="https://wa.me/5562983410308?text=Olá!%20Gostaria%20de%20saber%20mais." class="wpp" target="_blank">
   <i class="fab fa-whatsapp"></i>
   <span>Falar agora</span>
 </a>
 
 <script>
-  // Header scroll
   const hdr = document.getElementById('hdr');
-  window.addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 60), { passive: true });
+  window.addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 40), { passive: true });
 
-  // Reveal
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: 0.08 });
   document.querySelectorAll('.up').forEach(el => obs.observe(el));
 
-  // Mobile menu
-  const mob = document.getElementById('mobMenu');
+  const mob = document.getElementById('mob');
   document.getElementById('burger').onclick = () => mob.classList.add('open');
   document.getElementById('mobClose').onclick = () => mob.classList.remove('open');
   function closeMob() { mob.classList.remove('open'); }
 
-  // Nav active state
-  const secs = document.querySelectorAll('section[id]');
-  const navAs = document.querySelectorAll('.hdr-nav a');
   window.addEventListener('scroll', () => {
-    let cur = '';
-    secs.forEach(s => { if (scrollY >= s.offsetTop - 130) cur = s.id; });
-    navAs.forEach(a => {
-      const active = a.getAttribute('href') === `#${cur}`;
-      a.style.color = active ? 'var(--purple)' : '';
-      a.style.background = active ? 'var(--purple-pale)' : '';
+    const cur = [...document.querySelectorAll('section[id]')].reduce((a, s) => scrollY >= s.offsetTop - 120 ? s.id : a, '');
+    document.querySelectorAll('.hdr-nav a').forEach(a => {
+      const on = a.getAttribute('href') === `#${cur}`;
+      a.style.color = on ? 'var(--p)' : ''; a.style.background = on ? 'var(--p-bg)' : '';
     });
   }, { passive: true });
 </script>
